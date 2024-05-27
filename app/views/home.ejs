@@ -3,11 +3,40 @@
 
 <head>
   <title>Home Page</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/header.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/tabs.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/timer.css">
+  <script src="javascripts/elements.js" defer></script>
+  <script src="javascripts/timer.js" defer></script>
 </head>
 
 <body>
-  <h1>Welcome to the <%= name %>!</h1>
+  <header>
+    <h2>Pomodoro Timer</h2>
+    <button class="log-out-btn">Log Out</button>
+  </header>
+  <main>
+    <article data-tabs class="tabs">
+      <section class="tabs__header">
+        <button id="pomo" class="tabs__header-tab is-active">Pomodoro</button>
+        <button id="short" class="tabs__header-tab">Short Break</button>
+        <button id="long" class="tabs__header-tab">Long Break</button>
+      </section>
+      <section class="countdown-container">
+          <div class="minutes-container">
+            <div class="minutes">25</div>
+            <div class="minutes-label">minutes</div>
+          </div>
+          
+          <div class="seconds-container">
+            <div class="seconds">00</div>
+            <div class="seconds-label">seconds</div>
+          </div>
+      </section>
+      <button class="timer-btn">Start</button>
+  </main>
+
 </body>
 
 </html>

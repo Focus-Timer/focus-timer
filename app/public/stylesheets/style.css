@@ -1,8 +1,36 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-a {
-  color: #00B7FF;
+body {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  pointer-events: auto;
+  background-color: #7091E6;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 2em;
+}
+
+.blur {
+  filter: blur(0.9em);
+  pointer-events: none;
+}
+
+button {
+  background-color: white;
+  color: #3D52A0;
+  border-radius: 0.25em;
+  border: none;
+  font-size: 1em;
+  letter-spacing: 0.0625em; 
+  font-weight: 600;
+  cursor: pointer;
 }

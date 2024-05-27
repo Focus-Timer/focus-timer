@@ -1,0 +1,45 @@
+.tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.875em;;
+    width: 30%;
+    color: white;
+    background-color: #6887d4; 
+    padding: 1em;
+    border-radius: 0.25em;
+    margin: 0 auto;
+}
+
+.tabs__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.tabs__header-tab {
+    color: white;
+    background-color: transparent;
+    padding: 1em;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.tabs__header-tab.is-active {
+    background-color: #3D52A0;
+}
+
+.tabs__content {
+    display: none;
+}
+
+.tabs__content.is-active {
+    display: block;
+}
+
+.timer-btn {
+    width: 50%;
+    padding: 0.8em;
+}
