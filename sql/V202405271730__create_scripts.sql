@@ -1,0 +1,17 @@
+USE FocusTimer;
+GO
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userid VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(350) NOT NULL UNIQUE
+);
+
+CREATE TABLE report (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userid VARCHAR(255) NOT NULL,
+    pomodoros INT NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userid) REFERENCES users(userid)
+);
