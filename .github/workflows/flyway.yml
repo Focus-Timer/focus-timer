@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'db/**'
+      - 'sql/**'
       - '.github/workflows/flyway.yml'
   workflow_dispatch:
   

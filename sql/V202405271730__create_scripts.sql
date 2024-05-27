@@ -2,16 +2,17 @@ USE FocusTimer;
 GO
 
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    userid VARCHAR(255) NOT NULL,
+    id INT PRIMARY KEY IDENTITY(1,1),
+    userid VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(350) NOT NULL UNIQUE
 );
 
 CREATE TABLE report (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY IDENTITY(1,1),
     userid VARCHAR(255) NOT NULL,
     pomodoros INT NOT NULL,
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userid) REFERENCES users(userid)
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userid) REFERENCES users(userid),
+    CONSTRAINT CHK_Pomodoros CHECK (pomodoros > 0 AND pomodoros < 43) -- Max 43 pomodoros in a day 
 );
