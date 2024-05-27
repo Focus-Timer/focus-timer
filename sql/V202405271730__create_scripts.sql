@@ -8,7 +8,8 @@ CREATE TABLE users (
     userid VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(350) NOT NULL UNIQUE
-);+
+);
+GO
 
 CREATE TABLE report (
     id INT AUTO_INCREMENT PRIMARY KEY,
