@@ -1,7 +1,5 @@
-
-CREATE DATABASE focus_timer;
-
-USE focus_timer;
+USE FocusTimer;
+GO
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -9,7 +7,6 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     email VARCHAR(350) NOT NULL UNIQUE
 );
-GO
 
 CREATE TABLE report (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,4 +15,3 @@ CREATE TABLE report (
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (userid) REFERENCES users(userid)
 );
-GO
