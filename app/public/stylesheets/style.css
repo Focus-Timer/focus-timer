@@ -15,8 +15,10 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  gap: 1em;
   overflow: auto;
   padding: 2em;
+  align-items: center;
 }
 
 .blur {

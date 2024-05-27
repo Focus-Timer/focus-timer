@@ -7,34 +7,53 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/header.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/tabs.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/timer.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/tasks.css">
   <script src="javascripts/elements.js" defer></script>
   <script src="javascripts/timer.js" defer></script>
 </head>
 
 <body>
-  <header>
-    <h2>Pomodoro Timer</h2>
+  <header class="site-header">
+    <h2>⏱️ Pomodoro Timer</h2>
     <button class="log-out-btn">Log Out</button>
   </header>
   <main>
-    <article data-tabs class="tabs">
-      <section class="tabs__header">
+    <article class="tabs">
+      <header class="tabs__header">
         <button id="pomo" class="tabs__header-tab is-active">Pomodoro</button>
         <button id="short" class="tabs__header-tab">Short Break</button>
         <button id="long" class="tabs__header-tab">Long Break</button>
-      </section>
+      </header>
       <section class="countdown-container">
           <div class="minutes-container">
-            <div class="minutes">25</div>
-            <div class="minutes-label">minutes</div>
+            <p class="minutes">25</p>
+            <p class="minutes-label">minutes</p>
           </div>
           
           <div class="seconds-container">
-            <div class="seconds">00</div>
-            <div class="seconds-label">seconds</div>
+            <p class="seconds">00</p>
+            <p class="seconds-label">seconds</p>
           </div>
       </section>
-      <button class="timer-btn">Start</button>
+      <footer class="tabs__buttons-container">
+        <aside></aside>
+        <button class="timer-btn">Start</button>
+        <svg class="skip-btn" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 24 24"><path fill="white" d="M16 18h2V6h-2M6 18l8.5-6L6 6z"/></svg>
+      </footer>
+      
+    </article>
+    <p class="inspiration">Hocus pocus, let's help you focus ✨</p>
+    <article class="tasks">
+      <section class="tasks__header">
+        <h2>Tasks</h2>
+        <ul class="ellipse">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </section>
+      <button class="add-task-btn">Add Task</button>
+    </article>
   </main>
 
 </body>

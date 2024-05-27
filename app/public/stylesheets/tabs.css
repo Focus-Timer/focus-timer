@@ -39,7 +39,20 @@
     display: block;
 }
 
+.tabs__buttons-container {
+    display: inline-grid;
+    grid-template-columns: 33% 33% 33%;
+    width: 100%;
+    align-items: center;
+}
+
 .timer-btn {
-    width: 50%;
+    width: 100%;
     padding: 0.8em;
+}
+
+.skip-btn {
+    margin-inline: auto;
+    cursor: pointer;
+    visibility: hidden;
 }
