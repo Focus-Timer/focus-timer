@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +11,7 @@ body {
   flex-direction: column;
   color: #fff;
   pointer-events: auto;
-  background-color: #7091E6;
+  background-color: #1F3543;
 }
 
 main {
@@ -28,7 +30,7 @@ main {
 
 button {
   background-color: white;
-  color: #3D52A0;
+  color: #1F3543;
   border-radius: 0.25em;
   border: none;
   font-size: 1em;

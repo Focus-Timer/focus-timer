@@ -5,7 +5,7 @@
     gap: 1.875em;;
     width: 30%;
     color: white;
-    background-color: #6887d4; 
+    background-color: #1F3543; 
     padding: 1em;
     border-radius: 0.25em;
     margin: 0 auto;
@@ -19,16 +19,17 @@
 }
 
 .tabs__header-tab {
-    color: white;
-    background-color: transparent;
+    color: #1F3543;
+    background-color: white;
     padding: 1em;
-    background: none;
     border: none;
     cursor: pointer;
 }
 
 .tabs__header-tab.is-active {
-    background-color: #3D52A0;
+    background-color: #1F3543;
+    color: white;
+    border: 0.1em solid white;
 }
 
 .tabs__content {
