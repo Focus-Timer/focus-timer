@@ -37,10 +37,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });

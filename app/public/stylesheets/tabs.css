@@ -1,8 +1,9 @@
 .tabs {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    gap: 1.875em;;
+    gap: 4em;;
     width: 30%;
     color: white;
     background-color: #1F3543; 
@@ -11,14 +12,15 @@
     margin: 0 auto;
 }
 
-.tabs__header {
+.tabs__buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    gap: 1em;
+    gap: 2em;
+    min-width: 12em;
 }
 
-.tabs__header-tab {
+.tabs__buttons-tab {
     color: #1F3543;
     background-color: white;
     padding: 1em;
@@ -26,7 +28,7 @@
     cursor: pointer;
 }
 
-.tabs__header-tab.is-active {
+.tabs__buttons-tab.is-active {
     background-color: #1F3543;
     color: white;
     border: 0.1em solid white;
@@ -41,19 +43,20 @@
 }
 
 .tabs__buttons-container {
-    display: inline-grid;
-    grid-template-columns: 33% 33% 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     align-items: center;
+    gap: 1em;
 }
 
 .timer-btn {
-    width: 100%;
+    min-width: 12em;
     padding: 0.8em;
 }
 
 .skip-btn {
-    margin-inline: auto;
     cursor: pointer;
     visibility: hidden;
 }

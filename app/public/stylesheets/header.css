@@ -1,12 +1,31 @@
 .site-header {
-    padding: 1em;
+    padding: 0.5em 1em;
     background: #375466;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5em;
+    align-items: center;
+
+    h2 {
+        max-width: 4em;
+    }
+    
+}
+
+.title-logo {
+    width: 4.5em;
+    height: 4.5em;
 }
 
 .log-out-btn {
-    width: 5.5em; 
+    width: 6.5em; 
     min-height: 2.125em; 
 }

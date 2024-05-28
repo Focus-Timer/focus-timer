@@ -1,5 +1,6 @@
 const minutesElement = document.querySelector('.minutes');
 const secondsElement = document.querySelector('.seconds');
+let mySound = new Audio('sounds/271666__honorhunter__tomato-squishwet.wav')
 let countdown;
 
 const countDownClock = (minutes = 25, seconds = 0) => {
@@ -51,7 +52,7 @@ function goToShortBreak() {
   shortBreakTab.classList.add('is-active');
   minutesElement.textContent = '05';
   secondsElement.textContent = '00';
-  inspirationalMessage.textContent = `Alakazam, it's time for a quick jam 🎵`;
+  inspirationalMessage.textContent = `Alakazam, it's time for a quick jam 🥫`;
   skipButton.style.visibility = 'hidden';
 }
 
@@ -68,6 +69,7 @@ function goToLongBreak() {
 }
   
 timerButton.onclick = () => {
+  mySound.play()
   if (timerButton.textContent === 'Start') {
     countDownClock(Number(minutesElement.textContent), Number(secondsElement.textContent));
     timerButton.textContent = 'Stop';
@@ -80,18 +82,22 @@ timerButton.onclick = () => {
 }
 
 pomodoroTab.onclick = () => {
+  mySound.play()
   goToPomodoro();
 }
 
 shortBreakTab.onclick = () => {
+  mySound.play()
   goToShortBreak();
 }
 
 longBreakTab.onclick = () => {
+  mySound.play()
   goToLongBreak();
 }
 
 skipButton.onclick = () => {
+  mySound.play()
   minutesElement.textContent = '00';
   secondsElement.textContent = '00';
   clearInterval(countdown);

@@ -15,37 +15,41 @@
 
 <body>
   <header class="site-header">
-    <h2>⏱️ Pomodoro Timer</h2>
+    <section class="title-container">
+      <img class="title-logo" src="images/tomato.svg" alt = "Logo" class = "logo-image"/>
+      <h2>FOCUS POCUS</h2>
+    </section>
+    
     <button class="log-out-btn">Log Out</button>
   </header>
   <main>
 
     <article class="tabs">
-      <header class="tabs__header">
-        <button id="pomo" class="tabs__header-tab is-active">Pomodoro</button>
-        <button id="short" class="tabs__header-tab">Short Break</button>
-        <button id="long" class="tabs__header-tab">Long Break</button>
-      </header>
-      <section class="countdown-container">
+      <div class="countdown-section-container">
+        <section class="countdown-container">
           <div class="minutes-container">
             <p class="minutes">25</p>
             <p class="minutes-label">minutes</p>
           </div>
-          
           <div class="seconds-container">
             <p class="seconds">00</p>
             <p class="seconds-label">seconds</p>
           </div>
       </section>
-      <footer class="tabs__buttons-container">
-        <aside></aside>
-        <button class="timer-btn">Start</button>
-        <svg class="skip-btn" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 24 24"><path fill="white" d="M16 18h2V6h-2M6 18l8.5-6L6 6z"/></svg>
-      </footer>
+      <p class="inspiration">Hocus pocus, let's help you focus ✨</p>
+      </div>
+      <div class="buttons-section-container">
+        <section class="tabs__buttons">
+          <button id="pomo" class="tabs__buttons-tab is-active">Pomodoro</button>
+          <button id="short" class="tabs__buttons-tab">Short Break</button>
+          <button id="long" class="tabs__buttons-tab">Long Break</button>
+        </section>
+        <footer class="tabs__buttons-container">
+          <button class="timer-btn">Start</button>
+          <svg class="skip-btn" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 24 24"><path fill="white" d="M16 18h2V6h-2M6 18l8.5-6L6 6z"/></svg>
+        </footer>
+      </div>
     </article>
-
-    <p class="inspiration">Hocus pocus, let's help you focus ✨</p>
-
     <article class="tasks">
       <section class="tasks__header">
         <h2>Tasks</h2>
@@ -70,6 +74,33 @@
       </dialog>
       <button class="add-task-btn">Add Task</button>
     </article>
+
+    <!-- 
+
+    <article class="tasks">
+      <section class="tasks__header">
+        <h2>Tasks</h2>
+        <ul class="ellipse">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </section>
+      <ul id="task-list">
+      </ul>
+      <dialog id="add-task-dialog" >
+        <section class="add-task-container">
+          <input class="add-task-input" type="text" placeholder="Enter the task name">
+          <p>Estimated Pomodoros:</p>
+          <input class="est-pomodoros" type="number" value="0">
+        </section>
+        <footer class="add-task-footer">
+          <button class="add-task-cancel-btn">Cancel</button>
+          <button class="add-task-save-btn">Save</button>
+        </footer>
+      </dialog>
+      <button class="add-task-btn">Add Task</button>
+    </article> -->
 
   </main>
 
