@@ -1,3 +1,16 @@
+flywaylocal.conf
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+*.lock.hcl
+
+*.state
+
 # Logs
 logs
 *.log
