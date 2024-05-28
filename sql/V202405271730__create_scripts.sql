@@ -5,7 +5,6 @@ CREATE TABLE users (
     id INT PRIMARY KEY IDENTITY(1,1),
     userid VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(255) NOT NULL,
-    email VARCHAR(350) NOT NULL UNIQUE
 );
 
 CREATE TABLE report (

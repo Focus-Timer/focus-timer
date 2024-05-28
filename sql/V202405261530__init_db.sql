@@ -1,0 +1,5 @@
+IF DB_ID('FocusTimer') IS NULL
+BEGIN
+    CREATE DATABASE FocusTimer;
+END
+GO
