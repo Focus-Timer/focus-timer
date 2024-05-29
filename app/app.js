@@ -13,9 +13,9 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); // Or pug, or whatever
 
-// if (process.env.MODE === 'debug') {
-app.use(logger('dev')); // Middleware to log requests
-// }
+if (process.env.MODE === 'debug') {
+  app.use(logger('dev')); // Middleware to log requests
+}
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Middleware to parse URL-encoded bodies
 app.use(cookieParser()); // Middleware to parse cookies
