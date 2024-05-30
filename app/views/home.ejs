@@ -50,7 +50,11 @@
         </ul>
         <dialog id="add-task-dialog" >
           <section class="add-task-container">
-            <input class="add-task-input" type="text" placeholder="Enter the task name">
+            <span class="task-input-container">
+              <input class="add-task-input" type="text" placeholder="Enter the task name">
+              <p class="add-task-input-error hide-component">Please enter a value</p>
+            </span>
+            
             <p>Estimated Pomodoros:</p>
             <span class="pomodoros">
               <input class="est-pomodoros" type="number" value="0">
@@ -65,7 +69,7 @@
           </section>
           <footer class="add-task-footer">
             <button class="add-task-cancel-btn">Cancel</button>
-            <button class="add-task-save-btn">Save</button>
+            <button class="add-task-save-btn" disabled>Save</button>
           </footer>
         </dialog>
       </article>

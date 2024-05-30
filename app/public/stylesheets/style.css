@@ -24,9 +24,8 @@ main {
   align-items: center;
 }
 
-.blur {
-  filter: blur(0.9em);
-  pointer-events: none;
+.hide-component {
+  display: none;
 }
 
 button {
