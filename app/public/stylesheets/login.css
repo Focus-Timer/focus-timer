@@ -45,39 +45,6 @@ body {
     padding: 2.5rem;
 }
 
-.password-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.password-wrapper input {
-    padding-right: 2.5rem; /* Ensure space for the image */
-}
-
-.password-wrapper img {
-    position: absolute;
-    top: 50%;
-    right: 0.75rem;
-    transform: translateY(-50%);
-    height: 1.25rem;
-    cursor: pointer;
-}
-
-.form input {
-    outline: 0;
-    background: #f2f2f2;
-    border-radius: 0.25rem;
-    width: 100%;
-    border: 0;
-    margin: 0.9375rem 0;
-    padding: 0.9375rem;
-    font-size: 0.875rem;
-}
-
-.form input:focus {
-    box-shadow: 0 0 0.3125rem 0 rgb(31, 53, 67);
-}
-
 span {
     color: red;
     margin: 0.625rem 0;
@@ -90,14 +57,26 @@ span {
     width: 100%;
     border: 0;
     margin-top: 0.625rem;
-    border-radius: 0.1875rem;
+    border-radius: 1rem;
     padding: 0.9375rem;
     color: #ffffff;
     font-size: 0.9375rem;
     transition: all 0.4s ease-in-out;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.gsi-material-button-icon {
+    height: 20px;
+    margin-right: 12px;
+    min-width: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .form button:hover,
 .form button:active,
 .form button:focus {
@@ -105,15 +84,5 @@ span {
     color: #fff;
 }
 
-.message {
-    margin: 0.9375rem 0;
-    text-align: center;
-}
-
-.form .message a {
-    font-size: 0.875rem;
-    color: #1f3543;
-    text-decoration: none;
-}
 
 
