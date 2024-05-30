@@ -37,6 +37,38 @@
           </div>
       </section>
       <p class="inspiration">Hocus pocus, let's help you focus ✨</p>
+      <article class="tasks">
+        <section class="tasks__header">
+          <h2>Tasks</h2>
+          <ul class="ellipse">
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </section>
+        <ul id="task-list">
+        </ul>
+        <dialog id="add-task-dialog" >
+          <section class="add-task-container">
+            <input class="add-task-input" type="text" placeholder="Enter the task name">
+            <p>Estimated Pomodoros:</p>
+            <span class="pomodoros">
+              <input class="est-pomodoros" type="number" value="0">
+              <button class="increase-pomodoros"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+              </svg></button>
+              <button class="decrease-pomodoros"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+              </svg></button>
+            </span>
+            
+          </section>
+          <footer class="add-task-footer">
+            <button class="add-task-cancel-btn">Cancel</button>
+            <button class="add-task-save-btn">Save</button>
+          </footer>
+        </dialog>
+      </article>
       </div>
       <div class="buttons-section-container">
         <section class="tabs__buttons">
@@ -48,59 +80,10 @@
           <button class="timer-btn">Start</button>
           <svg class="skip-btn" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 24 24"><path fill="white" d="M16 18h2V6h-2M6 18l8.5-6L6 6z"/></svg>
         </footer>
+        <button class="add-task-btn">Add Task</button>
       </div>
     </article>
-    <article class="tasks">
-      <section class="tasks__header">
-        <h2>Tasks</h2>
-        <ul class="ellipse">
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </section>
-      <ul id="task-list">
-      </ul>
-      <dialog id="add-task-dialog" >
-        <section class="add-task-container">
-          <input class="add-task-input" type="text" placeholder="Enter the task name">
-          <p>Estimated Pomodoros:</p>
-          <input class="est-pomodoros" type="number" value="0">
-        </section>
-        <footer class="add-task-footer">
-          <button class="add-task-cancel-btn">Cancel</button>
-          <button class="add-task-save-btn">Save</button>
-        </footer>
-      </dialog>
-      <button class="add-task-btn">Add Task</button>
-    </article>
-
-    <!-- 
-
-    <article class="tasks">
-      <section class="tasks__header">
-        <h2>Tasks</h2>
-        <ul class="ellipse">
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </section>
-      <ul id="task-list">
-      </ul>
-      <dialog id="add-task-dialog" >
-        <section class="add-task-container">
-          <input class="add-task-input" type="text" placeholder="Enter the task name">
-          <p>Estimated Pomodoros:</p>
-          <input class="est-pomodoros" type="number" value="0">
-        </section>
-        <footer class="add-task-footer">
-          <button class="add-task-cancel-btn">Cancel</button>
-          <button class="add-task-save-btn">Save</button>
-        </footer>
-      </dialog>
-      <button class="add-task-btn">Add Task</button>
-    </article> -->
+    
 
   </main>
 
