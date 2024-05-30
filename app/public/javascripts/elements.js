@@ -11,6 +11,7 @@ const pomodorosInput = document.querySelector(".est-pomodoros");
 const addTaskInputError = document.querySelector(".add-task-input-error");
 const increasePomodorosButton = document.querySelector(".increase-pomodoros");
 const decreasePomodorosButton = document.querySelector(".decrease-pomodoros");
+const taskListComponent = document.getElementById("task-list");
 const pomodoroTab = document.getElementById("pomo");
 const shortBreakTab = document.getElementById("short");
 const longBreakTab = document.getElementById("long");

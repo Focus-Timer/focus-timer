@@ -137,4 +137,35 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0 0.125em 0.125em;
 }
 
+#task-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+.task-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 94%;
+    background-color: white;
+    border-radius: 0.25em;
+    border: 0.1em solid #1F3543;
+    color: black;
+    padding: 0.5em 1em;
+    cursor: pointer;
+
+    p {
+        max-width: 30em;
+        overflow-wrap: break-word;
+    }
+}
+
+.active-task {
+    background-color: #1F3543;
+    color: white;
+    border: 0.1em solid white;
+}
+
 
