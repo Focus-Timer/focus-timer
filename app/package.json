@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "doc": "docker compose -f docker-compose.yml up --build -d",
+    "docl": "docker compose -f docker-compose.local.yml up --build -d",
+    "stop": "docker compose down"
   },
   "author": "",
   "license": "ISC",

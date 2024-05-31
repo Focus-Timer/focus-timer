@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # website:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./Dockerfile
+  #   container_name: focus-app
+  #   environment:
+  #     NODE_ENV: production
+  #   ports:
+  #     - 80:80
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${Sa_Password:-StrongPassword123#}
+      - MSSQL_PID=Developer
+    ports:
+      - 1433:1433
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P ${Sa_Password:-StrongPassword123#} -Q 'SELECT 1' || exit 1"
+        ]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 3s
+  sqlserver.configurator:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    command: >
+      bash -c ' /opt/mssql-tools/bin/sqlcmd -S sqlserver,1433 -U sa -P ${Sa_Password:-StrongPassword123#} -d master -i docker-entrypoint-initdb.d/init.sql; echo "All done!"; '
