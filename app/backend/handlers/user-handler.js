@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const cors = require("cors");
-const corsOptions = require('../../config/cors-middleware');
-var verifyToken = require('../../config/auth-middleware');
+const corsOptions = require('../config/cors-middleware.js');
+var verifyToken = require('../config/auth-middleware.js');
 var UserService = require('../services/user-service.js');
 
 router.put('/sign-in', cors(corsOptions), verifyToken, async (req, res, next) => {

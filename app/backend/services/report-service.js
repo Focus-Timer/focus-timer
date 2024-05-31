@@ -1,4 +1,4 @@
-var { getPool } = require('../../config/db.js')
+var { getPool } = require('../config/db.js')
 var sql = require('mssql');
 
 async function getReport(user) {

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const cors = require("cors");
-const corsOptions = require('../../config/cors-middleware');
-var verifyToken = require('../../config/auth-middleware');
+const corsOptions = require('../config/cors-middleware.js');
+var verifyToken = require('../config/auth-middleware.js');
 var ReportService = require('../services/report-service.js');
 
 router.get('/report', cors(corsOptions), verifyToken, async (req, res) => {

@@ -1,6 +1,7 @@
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const jwksRsa = require('jwks-rsa');
+const debug_mode = process.env.MODE === 'debug';
 
 function verifyToken(req, res, next) {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
@@ -44,7 +45,7 @@ function verifyToken(req, res, next) {
       next();
     });
   } catch (error) {
-    res.status(401).json({ error: 'Invalid token' });
+    res.status(500).json({ error: 'Internal server error when verifying token' });
   }
 };
 

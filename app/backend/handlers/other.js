@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const cors = require("cors");
-const corsOptions = require('../../config/cors-middleware');
-const verifyToken = require('../../config/auth-middleware');
+const corsOptions = require('../config/cors-middleware');
+const verifyToken = require('../config/auth-middleware');
 
 router.get("/hello", cors(corsOptions), (req, res) => {
   console.log("Hello start");
