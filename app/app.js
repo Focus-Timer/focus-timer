@@ -20,7 +20,7 @@ app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Middleware to parse URL-encoded bodies
 app.use(cookieParser()); // Middleware to parse cookies
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve static files
-
+app.use(express.static(path.join(__dirname, 'app/public/javascripts')));
 // Routes
 let viewRouter = require('./routes/view');
 
