@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "42c3b2de-108e-41b7-b9d3-f14245c5c83c",
+		"name": "FocusTimer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25904027"
+	},
+	"item": [
+		{
+			"name": "report",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "user01",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "user02",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/report",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "report",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "user1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"pomodoros\":2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/report",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000"
+		}
+	]
+}
