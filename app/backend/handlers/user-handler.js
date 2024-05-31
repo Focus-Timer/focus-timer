@@ -5,12 +5,15 @@ const corsOptions = require('../config/cors-middleware.js');
 var verifyToken = require('../config/auth-middleware.js');
 var UserService = require('../services/user-service.js');
 
-router.put('/sign-in', cors(corsOptions), verifyToken, async (req, res, next) => {
+router.put('/signIn', cors(corsOptions), verifyToken, async (req, res, next) => {
   try {
     const user = await UserService.signIn(req.user);
+    if (!user) {
+      return res.status(404).send({ message: 'Could not sign in' });
+    }
     res.send({ user });
   } catch (error) {
-    console.error('Error creating user:', error);
+    console.error('Error signing in user:', error);
     res.status(500).send({ message: 'Internal server error' });
   }
 });

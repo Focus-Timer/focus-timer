@@ -6,9 +6,9 @@ async function getReport(user) {
     const pool = await getPool();
     const reportInfo = await pool.request()
       .input('userid', sql.VarChar(255), user.sub)
-      .query("SELECT * FROM reports \
-              WHERE users.userid=@userid;");
-    return reportInfo.recordsets;
+      .query("SELECT * FROM report \
+              WHERE report.userid=@userid;");
+    return reportInfo.recordsets[0];
   } catch (error) {
     console.log(error);
     return;

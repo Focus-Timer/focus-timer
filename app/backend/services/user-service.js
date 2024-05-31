@@ -7,8 +7,8 @@ async function getUser(user) {
     const userInfo = await pool.request()
       .input('userid', sql.VarChar(255), user.sub)
       .query("SELECT * FROM users \
-              WHERE users.user_id=@userid;");
-    return userInfo.recordsets;
+              WHERE users.userid=@userid;");
+    return userInfo.recordsets[0];
   } catch (error) {
     console.log(error);
     return;

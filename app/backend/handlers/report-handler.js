@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const cors = require("cors");
+const { body, validationResult } = require('express-validator');
 const corsOptions = require('../config/cors-middleware.js');
 var verifyToken = require('../config/auth-middleware.js');
 var ReportService = require('../services/report-service.js');
 
-router.get('/report', cors(corsOptions), verifyToken, async (req, res) => {
+router.get('/getReport', cors(corsOptions), verifyToken, async (req, res) => {
   try {
     const report = await ReportService.getReport(req.user);
     if (!report) {
@@ -18,15 +19,21 @@ router.get('/report', cors(corsOptions), verifyToken, async (req, res) => {
   }
 });
 
-router.post('/report', cors(corsOptions), verifyToken, async (req, res) => {
+router.post('/postReport', cors(corsOptions), verifyToken, body('pomodoros').isInt({ min: 1, max: 43 }).withMessage('Pomodoros must be an integer between 1 and 43'), async (req, res) => {
   try {
-    const user = await ReportService.postReport(req.user, req.report);
-    if (!user) {
-      return res.status(404).send({ message: 'User not found' });
+    //Do we want to do it this way or is there a better way?
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    res.send({ user });
+    //End of validation
+    const report = await ReportService.postReport(req.user, req.body);
+    if (!report) {
+      return res.status(404).send({ message: 'Report not posted' });
+    }
+    res.send({ report });
   } catch {
-    console.error('Error retrieving user:', error);
+    console.error('Error posting report:', error);
     res.status(500).send({ message: 'Internal server error' });
   }
 });
