@@ -2,6 +2,7 @@ const minutesElement = document.querySelector('.minutes');
 const secondsElement = document.querySelector('.seconds');
 let mySound = new Audio('sounds/271666__honorhunter__tomato-squishwet.wav')
 let countdown;
+let tempPomodoro = 1;
 
 const countDownClock = (minutes = 25, seconds = 0) => {
   const now = Date.now();
@@ -12,13 +13,35 @@ const countDownClock = (minutes = 25, seconds = 0) => {
   
     if(secondsLeft <= 0) {
       clearInterval(countdown);
-      if (minutes === 25) {
-        goToShortBreak();
-      } else if (minutes === 5) {
-        goToLongBreak();
-      } else if (minutes === 15) {
-        // Pomodoro complete
+
+      if (taskList.length > 0) {
+        if (minutes === 25) {
+          taskList[currentTaskItem].currentPomodoro++;
+          if (taskList[currentTaskItem].currentPomodoro % 4 !== 0) {
+            goToShortBreak();
+          } else {
+            goToLongBreak();
+          }
+          updateTaskList();
+        } else if (minutes === 5) {
+          goToPomodoro();
+        } else if (minutes === 15) {
+          goToPomodoro();
+        }
+      } else {
+        if (minutes === 25) {
+          tempPomodoro++;
+          if (tempPomodoro % 4 !== 0) {
+            goToShortBreak();
+          } else {
+            goToLongBreak();
+          }
+          
+        } else if (minutes === 5 || minutes === 15) {
+          goToPomodoro();
+        }
       }
+      
       return;
     };
   
@@ -101,12 +124,30 @@ skipButton.onclick = () => {
   minutesElement.textContent = '00';
   secondsElement.textContent = '00';
   clearInterval(countdown);
-  if (pomodoroTab.classList.contains('is-active')) {
-    goToShortBreak();
-  } else if (shortBreakTab.classList.contains('is-active')) {
-    goToLongBreak();
-  } else if (longBreakTab.classList.contains('is-active')) {
-    // Pomodoro complete
+  if (taskList.length > 0) {
+    if (pomodoroTab.classList.contains('is-active')) {
+      taskList[currentTaskItem].currentPomodoro++;
+      if (taskList[currentTaskItem].currentPomodoro % 4 !== 0) {
+        goToShortBreak();
+      } else {
+        goToLongBreak();
+      }
+      updateTaskList();
+    } else if (shortBreakTab.classList.contains('is-active') || longBreakTab.classList.contains('is-active')) { 
+      goToPomodoro();
   }
+  } else {
+    if (pomodoroTab.classList.contains('is-active')) {
+      tempPomodoro++;
+      if (tempPomodoro % 4 !== 0) {
+        goToShortBreak();
+      } else {
+        goToLongBreak();
+      }
+    } else if (shortBreakTab.classList.contains('is-active') || longBreakTab.classList.contains('is-active')) { 
+        goToPomodoro();
+    }
+  }
+  
 }
   

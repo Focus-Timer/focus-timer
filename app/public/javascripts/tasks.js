@@ -25,6 +25,7 @@ addTaskSaveButton.onclick = () => {
         const task = {
             taskName: addTaskInput.value,
             taskPomodoros: pomodorosInput.value,
+            currentPomodoro: 0,
         };
         taskList.push(task);
         updateTaskList();
@@ -50,7 +51,6 @@ decreasePomodorosButton.onclick = () => {
 }
 
 taskListComponent.addEventListener('click', function(event){
-        
         const li = event.target.closest('li');
         const nodes = Array.from( taskListComponent.children );
         const index = nodes.indexOf(li);
@@ -59,8 +59,6 @@ taskListComponent.addEventListener('click', function(event){
             currentTaskItem = index;
             document.getElementById('task-' + currentTaskItem).classList.add('active-task');
         }
-        
-    
  });
 
 function pomodorosChangeHandler() {
@@ -74,14 +72,11 @@ function pomodorosChangeHandler() {
 }
 
 function updateTaskList() {
-    let listItem, taskName, taskPomodoros;
     taskListComponent.innerHTML = '';
 
     for (var i = 0; i < taskList.length; i++) {
         let task = taskList[i];
         listItem = document.createElement("li");
-        taskName = document.createElement("p");
-        taskPomodoros = document.createElement("p");
 
         listItem.setAttribute('id', 'task-' + i);
         listItem.classList.add('task-item');
@@ -90,11 +85,19 @@ function updateTaskList() {
         } else {
             listItem.classList.remove('active-task');
         }
-        taskName.textContent = task.taskName;
-        taskPomodoros.textContent = '0/' + task.taskPomodoros;
 
-        listItem.appendChild(taskName);
-        listItem.appendChild(taskPomodoros);
+        listItem.innerHTML += `<section class="task-left">
+        <input type="checkbox" class="checkbox-round" />
+        <p>${task.taskName}</p>    
+      </section>
+      <section class="task-right">
+        <p>${task.currentPomodoro}/${task.taskPomodoros}</p>
+        <ul class="ellipse">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </section>`
 
         taskListComponent.appendChild(listItem);
     }
