@@ -1,4 +1,5 @@
 pomodorosInput.addEventListener('input', pomodorosChangeHandler);
+
 addTaskSaveButton.disabled = false;
 let taskList = [];
 let currentTaskItem = 0;
@@ -39,7 +40,7 @@ addTaskSaveButton.onclick = () => {
 
 
 increasePomodorosButton.onclick = () => {
-    if (pomodorosInput.value < 100) {
+    if (pomodorosInput.value < 44) {
         ++pomodorosInput.value;
     }  
 }
@@ -62,8 +63,8 @@ taskListComponent.addEventListener('click', function(event){
  });
 
 function pomodorosChangeHandler() {
-    if (pomodorosInput.value > 99) {
-        pomodorosInput.value = 99;
+    if (pomodorosInput.value > 43) {
+        pomodorosInput.value = 43;
     } else if (pomodorosInput.value < 0) {
         pomodorosInput.value = 0;
     } else if (!pomodorosInput.value) {
@@ -72,6 +73,11 @@ function pomodorosChangeHandler() {
 }
 
 function updateTaskList() {
+    let checkboxes = taskListComponent.querySelectorAll('.checkbox-round');
+    checkboxes.forEach(checkbox => {
+      checkbox.removeEventListener('change', handleCheckboxChange);
+    });
+
     taskListComponent.innerHTML = '';
 
     for (var i = 0; i < taskList.length; i++) {
@@ -88,7 +94,7 @@ function updateTaskList() {
 
         listItem.innerHTML += `<section class="task-left">
         <input type="checkbox" class="checkbox-round" />
-        <p>${task.taskName}</p>    
+        <h4>${task.taskName}</h4>    
       </section>
       <section class="task-right">
         <p>${task.currentPomodoro}/${task.taskPomodoros}</p>
@@ -101,4 +107,20 @@ function updateTaskList() {
 
         taskListComponent.appendChild(listItem);
     }
+
+    checkboxes = taskListComponent.querySelectorAll('.checkbox-round');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', handleCheckboxChange);
+    });
 }
+
+function handleCheckboxChange(event) {
+    const checkbox = event.target;
+    const listItem = checkbox.parentElement.parentElement;
+    
+    if (checkbox.checked) {
+        listItem.classList.add('strike-through');
+    } else {
+        listItem.classList.remove('strike-through');
+    }
+  }

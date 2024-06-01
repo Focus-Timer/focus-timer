@@ -28,6 +28,10 @@ main {
   display: none;
 }
 
+.strike-through h4 {
+  text-decoration: line-through
+}
+
 button {
   background-color: white;
   color: #1F3543;
