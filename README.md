@@ -30,6 +30,9 @@ docker compose down #To terminate
 ```
 
 ### Running local docker testing environment
+Ensure that you have setup docker and docker-compose on your local machine in wsl 
+```sh
+```
 Retrieve your wsl endpoint
 ```.sh
 wsl hostname -I
@@ -43,6 +46,7 @@ DB_PASSWORD=StrongPassword123*
 DB_NAME=FocusTimer
 DB_USERNAME=db_user
 DB_PORT=1433
+
 ```
 Run the following commands
 ```sh
