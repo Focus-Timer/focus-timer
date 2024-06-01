@@ -10,7 +10,7 @@ async function getUser(user) {
               WHERE users.userid=@userid;");
     return userInfo.recordsets[0];
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return;
   }
 }
@@ -34,7 +34,7 @@ async function signIn(user) {
             `);
     return userInfo.recordsets[0];
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return;
   }
 }
