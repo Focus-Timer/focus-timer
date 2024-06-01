@@ -32,6 +32,7 @@ docker compose down #To terminate
 ### Running local docker testing environment
 Ensure that you have setup docker and docker-compose on your local machine in wsl 
 ```sh
+https://cuteprogramming.blog/2023/05/21/using-docker-and-kubernetes-without-docker-desktop-on-windows-11/
 ```
 Retrieve your wsl endpoint
 ```.sh
@@ -46,7 +47,7 @@ DB_PASSWORD=StrongPassword123*
 DB_NAME=FocusTimer
 DB_USERNAME=db_user
 DB_PORT=1433
-
+USERPOOLID=eu-west-1_IKRz0uOSt
 ```
 Run the following commands
 ```sh
