@@ -11,6 +11,8 @@ flywaylocal.conf
 
 *.state
 
+https-setup
+
 # Logs
 logs
 *.log
