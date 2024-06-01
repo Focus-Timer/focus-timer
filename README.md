@@ -20,7 +20,36 @@ cd app
 npm install
 npm run start
 ```
-There is an option to decouple the two and host the static pages on an s3 bucket
+
+### Running local docker production environment
+```sh
+cd app
+docker compose down
+sudo docker compose up --build -d
+docker compose down #To terminate
+```
+
+### Running local docker testing environment
+Retrieve your wsl endpoint
+```.sh
+wsl hostname -I
+```
+Define a .env file like so in the app directory
+```.env
+PORT_LOCAL=80
+MODE=debug
+DB_ENDPOINT={wsl endpoint}
+DB_PASSWORD=StrongPassword123*
+DB_NAME=FocusTimer
+DB_USERNAME=db_user
+DB_PORT=1433
+```
+Run the following commands
+```sh
+cd app
+sudo docker compose -f ./docker-compose.local.yml up --build -d
+docker compose -f ./docker-compose.local.yml down #To terminate
+```
 
 ## Access the database using MS SQL Server studio
 - Open ms sql sever studio
