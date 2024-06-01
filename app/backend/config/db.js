@@ -3,20 +3,15 @@ var sql = require('mssql');
 
 let pool;
 
-console.log("DB_USERNAME:", process.env.DB_USERNAME);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-console.log("DB_NAME:", process.env.DB_NAME);
-console.log("DB_ENDPOINT:", process.env.DB_ENDPOINT)
-
 const dbConfig = {
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   server: process.env.DB_ENDPOINT,
   pool: {
-    max: 10,
+    max: 5,
     min: 0,
-    idleTimeoutMillis: 30000
+    idleTimeoutMillis: 10000
   },
   options: {
     encrypt: true,
@@ -30,6 +25,7 @@ async function initializePool() {
   try {
     pool = await sql.connect(dbConfig);
   } catch (error) {
+    console.error('Failed to initialize pool:', error);
     throw error;
   }
 }
