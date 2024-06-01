@@ -1,4 +1,4 @@
-require('dotenv').config({override: true}); // Load environment variables from .env file
+require('dotenv').config({ override: true }); // Load environment variables from .env file
 var sql = require('mssql');
 
 let pool;
@@ -9,9 +9,9 @@ const dbConfig = {
   database: process.env.DB_NAME,
   server: process.env.DB_ENDPOINT,
   pool: {
-    max: 10,
+    max: 5,
     min: 0,
-    idleTimeoutMillis: 30000
+    idleTimeoutMillis: 10000
   },
   options: {
     encrypt: true,
@@ -25,6 +25,7 @@ async function initializePool() {
   try {
     pool = await sql.connect(dbConfig);
   } catch (error) {
+    console.error('Failed to initialize pool:', error);
     throw error;
   }
 }
