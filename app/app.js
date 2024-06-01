@@ -20,7 +20,7 @@ if (process.env.MODE === 'debug') {
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Middleware to parse URL-encoded bodies
 app.use(cookieParser()); // Middleware to parse cookies
-app.use(express.static(path.join(__dirname, '/frontend/public'))); // Middleware to serve static files
+app.use(express.static(path.join(__dirname, 'frontend/public'))); // Middleware to serve static files
 
 // Routes
 let viewRouter = require('./frontend/routes/view');
