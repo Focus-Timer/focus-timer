@@ -10,7 +10,7 @@ async function getReport(user) {
               WHERE report.userid=@userid;");
     return reportInfo.recordsets[0];
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return;
   }
 }
@@ -24,7 +24,7 @@ async function postReport(user, report) {
       .query('INSERT INTO report (userId, pomodoros) OUTPUT inserted.id, inserted.userid, inserted.pomodoros VALUES (@userid, @pomodoros)');
     return reportInfo.recordsets[0];
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return;
   }
 }
