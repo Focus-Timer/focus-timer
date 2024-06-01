@@ -1,6 +1,6 @@
 const minutesElement = document.querySelector('.minutes');
 const secondsElement = document.querySelector('.seconds');
-let mySound = new Audio('sounds/271666__honorhunter__tomato-squishwet.wav')
+let mySound = new Audio('resources/271666__honorhunter__tomato-squishwet.wav')
 let countdown;
 let tempPomodoro = 1;
 

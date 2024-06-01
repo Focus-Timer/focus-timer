@@ -4,13 +4,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { join } = require("path");
 require('dotenv').config({ override: true }); // Load environment variables from .env file
+const cors = require("cors");
 
 const PORT = process.env.PORT || process.env.PORT_LOCAL || 80;
 
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'frontend/views'));
 app.set('view engine', 'ejs'); // Or pug, or whatever
 
 if (process.env.MODE === 'debug') {
@@ -19,13 +20,20 @@ if (process.env.MODE === 'debug') {
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Middleware to parse URL-encoded bodies
 app.use(cookieParser()); // Middleware to parse cookies
-app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve static files
-app.use(express.static(path.join(__dirname, 'app/public/javascripts')));
-// Routes
-let viewRouter = require('./routes/view');
+app.use(express.static(path.join(__dirname, 'frontend/public'))); // Middleware to serve static files
 
+// Routes
+let viewRouter = require('./frontend/routes/view');
+//handler
+let otherHandler = require('./backend/handlers/other');
+let userHandler = require('./backend/handlers/user-handler');
+let reportHandler = require('./backend/handlers/report-handler');
 // Mount routers
 app.use('/', viewRouter);
+// Mount API handlers
+app.use('/api/user', userHandler);
+app.use('/api/report', reportHandler);
+app.use('/api/other', otherHandler);
 
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
