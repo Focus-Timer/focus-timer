@@ -151,7 +151,7 @@ resource "aws_lb" "example" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_sg.id]
-  subnets            = join(",", aws_subnet.public_subnets[*].id)
+  subnets            = tolist(aws_subnet.public_subnets[*].id)
 }
 
 # Listener using the imported ACM certificate
