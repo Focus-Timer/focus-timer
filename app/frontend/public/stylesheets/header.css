@@ -25,7 +25,18 @@
     height: 4.5em;
 }
 
+.header-button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em
+}
+
 .log-out-btn {
+    width: 6.5em; 
+    min-height: 2.125em; 
+}
+
+.show-report-btn {
     width: 6.5em; 
     min-height: 2.125em; 
 }
