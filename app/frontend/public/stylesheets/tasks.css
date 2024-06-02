@@ -1,0 +1,222 @@
+.tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+    background-color: inherit;
+    width: 100%;
+}
+
+.tasks__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 0.2em solid white;
+}
+
+.ellipse {
+    cursor: pointer;
+    background-color: white;
+    border: 0.1em solid #1F3543;
+    padding: 0.5em;
+    border-radius: 0.2em;
+    margin-bottom: 0.1em;
+}
+
+.ellipse:hover {
+    background-color: #375466;
+}
+
+.ellipse li {
+    background: none repeat scroll 0 0 #1F3543;
+    height: 0.25em;
+    width: 0.25em;
+    line-height: 0;
+    list-style: none outside none;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    vertical-align: top;
+    border-radius:50%;
+}
+
+.add-task-btn {
+    min-width: 12em;
+    height: 3em;
+    background-color: #1F3543;
+    color: #EBEBE4;
+    border: 0.1em dashed #EBEBE4;
+}
+
+.add-task-btn:hover {
+    background-color: #375466;
+    color: white;
+    border: 0.1em dashed white;
+}
+
+#add-task-dialog {
+    display: none;
+    flex-direction: column;
+    gap: 1em;
+    border: none;
+    border-radius: 0.375em; 
+    position: relative;
+    background-color: white;
+    width: 100%;
+    overflow: auto;
+    visibility: hidden;
+}
+
+.add-task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 0.625em 1.5625em;
+}
+
+.task-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-task-input {
+    border: none;
+    height: 3em;
+    padding: 0.5em;
+    width: 95%;
+    font-size: 1em;
+    border-radius: 0.25em;
+}
+
+.add-task-input-error {
+    color: red;
+    font-size: 0.6em;
+    padding-left: 1em;
+}
+
+.add-task-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1em;
+    background-color: rgb(239, 239, 239);
+    padding: 0.5em;
+}
+
+.add-task-cancel-btn {
+    background-color: transparent;
+    color: rgb(136, 136, 136);
+    opacity: 0.9;
+    padding: 0.5em 0.75em;
+}
+
+.add-task-save-btn {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+    padding: 0.5em 0.75em;
+    background-color: rgb(34, 34, 34);
+    color: white;
+}
+
+.pomodoros {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.5em;
+}
+
+.est-pomodoros {
+    width: 10%;
+    padding: 0.5em;
+    background-color: rgb(239, 239, 239);
+    border-radius: 0.25em;
+    border: none;
+}
+
+.increase-pomodoros, .decrease-pomodoros {
+    width: 5%;
+    border: 0.0625em solid rgb(239, 239, 239);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0.125em 0.125em;
+}
+
+#task-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+.task-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 94%;
+    background-color: white;
+    border-radius: 0.25em;
+    border: 0.1em solid #1F3543;
+    color: black;
+    padding: 0.5em 1em;
+    cursor: pointer;
+
+    p {
+        max-width: 30em;
+        overflow-wrap: break-word;
+    }
+}
+
+.active-task {
+    background-color: #1F3543;
+    color: white;
+    border: 0.1em solid white;
+}
+
+.task-left, .task-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+    align-items: center;
+}
+
+.checkbox-round {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-round:checked {
+    background-color: #375466;
+}
+
+#delete-task-dialog {
+    color: white;
+    border-radius: 0.25em;
+    border: 0.1em solid #375466;
+}
+
+#delete-task-dialog:hover {
+    color: #375466;
+
+    .delete-task-btn {
+        background-color: #375466;
+        color: white;
+        border-radius: 0;
+    }
+}
+
+.delete-task-btn {
+    height: 2.1em !important;
+}
+
+/* .delete-task-btn:hover {
+    background-color: #375466;
+    color: white;
+    border-radius: 0;
+} */
+

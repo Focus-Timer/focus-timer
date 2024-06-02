@@ -1,0 +1,61 @@
+.tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4em;;
+    color: white;
+    background-color: #1F3543; 
+    padding: 1em;
+    border-radius: 0.25em;
+    margin: 0 auto;
+}
+
+.tabs__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2em;
+    min-width: 12em;
+}
+
+.tabs__buttons-tab {
+    color: #1F3543;
+    background-color: white;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+}
+
+.tabs__buttons-tab.is-active {
+    background-color: #1F3543;
+    color: white;
+    border: 0.1em solid white;
+}
+
+.tabs__content {
+    display: none;
+}
+
+.tabs__content.is-active {
+    display: block;
+}
+
+.tabs__buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    gap: 1em;
+}
+
+.timer-btn {
+    min-width: 12em;
+    padding: 0.8em;
+}
+
+.skip-btn {
+    cursor: pointer;
+    visibility: hidden;
+}

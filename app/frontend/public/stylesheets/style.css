@@ -1,8 +1,56 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins';
+  font-weight: 400;
 }
 
-a {
-  color: #00B7FF;
+body {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  pointer-events: auto;
+  background-color: #1F3543;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow: auto;
+  padding: 2em;
+  align-items: center;
+}
+
+.hide-component {
+  display: none;
+}
+
+.strike-through h4 {
+  text-decoration: line-through
+}
+
+button {
+  background-color: white;
+  color: #1F3543;
+  border-radius: 0.25em;
+  border: none;
+  font-size: 1em;
+  letter-spacing: 0.0625em; 
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

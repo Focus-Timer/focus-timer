@@ -3,11 +3,109 @@
 
 <head>
   <title>Home Page</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/header.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/tabs.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/timer.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/tasks.css">
+  <script src ="scripts/tokenParser.js" defer></script>
+  <script src="scripts/elements.js" defer></script>
+  <script src="scripts/timer.js" defer></script>
+  <script src="scripts/tasks.js" defer></script>
 </head>
 
 <body>
-  <h1>Welcome to the <%= name %>!</h1>
+  <header class="site-header">
+    <section class="title-container">
+      <img class="title-logo" src="resources/tomato.svg" alt = "Logo" class = "logo-image"/>
+      <h2>FOCUS POCUS</h2>
+    </section>
+    <a href = "https://focuspocus.auth.eu-west-1.amazoncognito.com/logout?logout_uri=http%3A%2F%2Flocalhost%2Flogin&client_id=5a78s0qjfu23hdmibeqrhfaldf">
+      <button class="log-out-btn">Log Out</button>
+    </a>
+
+  </header>
+  <main>
+
+    <article class="tabs">
+      <div class="countdown-section-container">
+        <section class="countdown-container">
+          <div class="minutes-container">
+            <p class="minutes">25</p>
+            <p class="minutes-label">minutes</p>
+          </div>
+          <div class="seconds-container">
+            <p class="seconds">00</p>
+            <p class="seconds-label">seconds</p>
+          </div>
+      </section>
+      <p class="inspiration">Hocus pocus, let's help you focus ✨</p>
+      <article class="tasks">
+          <h2 class="tasks__header">Tasks</h2>
+          <ul id="task-list">
+            <!-- <li class="task-item active-task">
+              <section class="task-left">
+                <input type="checkbox" class="checkbox-round" />
+                <p>Task Name</p>    
+              </section>
+              <section class="task-right">
+                <p>0/1</p>
+                <ul class="ellipse">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </section>
+            </li> -->
+          </ul>
+          <dialog id="delete-task-dialog" class="hidden">
+            <button class="delete-task-btn">Delete Task</button>
+          </dialog>
+        <dialog id="add-task-dialog" >
+          <section class="add-task-container">
+            <span class="task-input-container">
+              <input class="add-task-input" type="text" placeholder="Enter the task name">
+              <p class="add-task-input-error hide-component">Please enter a value</p>
+            </span>
+            
+            <p>Estimated Pomodoros:</p>
+            <span class="pomodoros">
+              <input class="est-pomodoros" type="number" value="0">
+              <button class="increase-pomodoros"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+              </svg></button>
+              <button class="decrease-pomodoros"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+              </svg></button>
+            </span>
+            
+          </section>
+          <footer class="add-task-footer">
+            <button class="add-task-cancel-btn">Cancel</button>
+            <button class="add-task-save-btn" disabled>Save</button>
+          </footer>
+        </dialog>
+      </article>
+      </div>
+      <div class="buttons-section-container">
+        <section class="tabs__buttons">
+          <button id="pomo" class="tabs__buttons-tab is-active">Pomodoro</button>
+          <button id="short" class="tabs__buttons-tab">Short Break</button>
+          <button id="long" class="tabs__buttons-tab">Long Break</button>
+        </section>
+        <footer class="tabs__buttons-container">
+          <button class="timer-btn">Start</button>
+          <svg class="skip-btn" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 24 24"><path fill="white" d="M16 18h2V6h-2M6 18l8.5-6L6 6z"/></svg>
+        </footer>
+        <button class="add-task-btn">Add Task</button>
+      </div>
+    </article>
+    
+
+  </main>
+
+  
+
 </body>
 
 </html>
