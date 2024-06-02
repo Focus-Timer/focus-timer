@@ -6,6 +6,7 @@ const { join } = require("path");
 require('dotenv').config({ override: true }); // Load environment variables from .env file
 const fs = require('fs');
 const https = require('https');
+const rateLimit = require("express-rate-limit");
 
 const PORT = process.env.PORT || process.env.PORT_LOCAL || 80;
 
@@ -22,6 +23,12 @@ app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Middleware to parse URL-encoded bodies
 app.use(cookieParser()); // Middleware to parse cookies
 app.use(express.static(path.join(__dirname, 'frontend/public'))); // Middleware to serve static files
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+// Apply the limiter to all requests
+app.use(limiter);
 
 // Routes
 let viewRouter = require('./frontend/routes/view');
