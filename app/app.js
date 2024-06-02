@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { join } = require("path");
 require('dotenv').config({ override: true }); // Load environment variables from .env file
-const cors = require("cors");
+const fs = require('fs');
+const https = require('https');
 
 const PORT = process.env.PORT || process.env.PORT_LOCAL || 80;
 
@@ -45,7 +46,18 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+if (process.env.MODE === 'local' || process.env.MODE === 'debug') {
+  const key = fs.readFileSync('./certs/localhost.decrypted.key');
+  const cert = fs.readFileSync('./certs/localhost.crt');
+  const server = https.createServer({ key, cert }, app);
+  server.listen(PORT, () => {
+    console.log(`Server is listening over HTTPs on https://localhost:${PORT}`);
+  });
+} else {
+  app.listen(PORT, () => {
+    console.log(`Server is listening over HTTP on http://localhost:${PORT}`);
+  });
+}
+
+
 

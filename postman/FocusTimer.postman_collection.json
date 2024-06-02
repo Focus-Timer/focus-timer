@@ -155,7 +155,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "localhost",
+			"value": "https://localhost:443",
 			"type": "string"
 		}
 	]
