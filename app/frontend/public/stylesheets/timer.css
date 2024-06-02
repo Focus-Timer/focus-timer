@@ -45,3 +45,8 @@
   margin-bottom: 0.3125em;
 }
 
+.timer-btn:hover {
+  background-color: #375466;
+  color: white;
+}
+

@@ -43,15 +43,11 @@
 .add-task-btn {
     min-width: 12em;
     height: 3em;
-    background-color: #1F3543;
-    color: #EBEBE4;
-    border: 0.1em dashed #EBEBE4;
 }
 
 .add-task-btn:hover {
     background-color: #375466;
     color: white;
-    border: 0.1em dashed white;
 }
 
 #add-task-dialog {
