@@ -8,10 +8,10 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/tabs.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/timer.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/tasks.css">
-  <script src = javascripts/tokenParser.js defer></script>
-  <script src="javascripts/elements.js" defer></script>
-  <script src="javascripts/timer.js" defer></script>
-  <script src="javascripts/tasks.js" defer></script>
+  <script src ="scripts/tokenParser.js" defer></script>
+  <script src="scripts/elements.js" defer></script>
+  <script src="scripts/timer.js" defer></script>
+  <script src="scripts/tasks.js" defer></script>
 </head>
 
 <body>
@@ -58,6 +58,9 @@
               </section>
             </li> -->
           </ul>
+          <dialog id="delete-task-dialog" class="hidden">
+            <button class="delete-task-btn">Delete Task</button>
+          </dialog>
         <dialog id="add-task-dialog" >
           <section class="add-task-container">
             <span class="task-input-container">

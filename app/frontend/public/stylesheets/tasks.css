@@ -194,3 +194,29 @@
     background-color: #375466;
 }
 
+#delete-task-dialog {
+    color: white;
+    border-radius: 0.25em;
+    border: 0.1em solid #375466;
+}
+
+#delete-task-dialog:hover {
+    color: #375466;
+
+    .delete-task-btn {
+        background-color: #375466;
+        color: white;
+        border-radius: 0;
+    }
+}
+
+.delete-task-btn {
+    height: 2.1em !important;
+}
+
+/* .delete-task-btn:hover {
+    background-color: #375466;
+    color: white;
+    border-radius: 0;
+} */
+
