@@ -13,7 +13,14 @@ Hocus pocus, let's help you focus
 ## Postman
 - Launch postman and import postman folder 
 
+## OPENSSL
+https://slproweb.com/download/Win64OpenSSL-3_2_1.exe
+
 ## Run-instructions
+### Running using https
+```sh
+Add MODE=secure to your .env file
+```
 ### Running Single Page Application Web app
 ```sh
 cd app
@@ -40,8 +47,8 @@ wsl hostname -I
 ```
 Define a .env file like so in the app directory
 ```.env
-PORT_LOCAL=80
-MODE=debug
+PORT_LOCAL=443
+MODE=local
 DB_ENDPOINT={wsl endpoint}
 DB_PASSWORD=StrongPassword123*
 DB_NAME=FocusTimer
