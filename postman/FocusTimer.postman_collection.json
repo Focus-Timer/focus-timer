@@ -8,6 +8,9 @@
 	"item": [
 		{
 			"name": "getReport",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -20,6 +23,15 @@
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"week-start\": \"2024-06-03 00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/api/report/getReport",
 					"host": [
@@ -50,7 +62,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"pomodoros\":2}",
+					"raw": "{\"pomodoros\":1}",
 					"options": {
 						"raw": {
 							"language": "json"

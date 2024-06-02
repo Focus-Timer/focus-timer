@@ -5,10 +5,11 @@ const { body, validationResult } = require('express-validator');
 const corsOptions = require('../config/cors-middleware.js');
 var verifyToken = require('../config/auth-middleware.js');
 var ReportService = require('../services/report-service.js');
+const moment = require('moment');
 
-router.get('/getReport', cors(corsOptions), verifyToken, async (req, res) => {
+router.get('/getReport', cors(corsOptions), verifyToken, validateWeekStart, async (req, res) => {
   try {
-    const report = await ReportService.getReport(req.user);
+    const report = await ReportService.getReport(req.user, req.body['week-start']);
     if (!report) {
       return res.status(404).send({ message: 'Report for user not found' });
     }
@@ -19,23 +20,42 @@ router.get('/getReport', cors(corsOptions), verifyToken, async (req, res) => {
   }
 });
 
-router.post('/postReport', cors(corsOptions), verifyToken, body('pomodoros').isInt({ min: 1, max: 43 }).withMessage('Pomodoros must be an integer between 1 and 43'), async (req, res) => {
+router.post('/postReport', cors(corsOptions), verifyToken, validatePomodoros, async (req, res) => {
   try {
-    //Do we want to do it this way or is there a better way?
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    //End of validation
-    const report = await ReportService.postReport(req.user, req.body);
+    const report = await ReportService.postReport(req.user, req.body['pomodoros']);
     if (!report) {
-      return res.status(404).send({ message: 'Report not posted' });
+      return res.status(404).send({ message: 'Report not posted because you are attempting the post an invalid pomodoro amount (Eg: It is most likely that your pomodoro amount exceeds the daily limit of 43 including previous submissions or you are attempting to submit 16 hours worth of pomodoros when it is only 9 in the morning' });
     }
-    res.send({ report });
+    res.status(200).send({ report });
   } catch {
     console.error('Error posting report:', error);
     res.status(500).send({ message: 'Internal server error' });
   }
 });
+
+//Validation 
+async function validatePomodoros(req, res, next) {
+  await body('pomodoros').isInt({ min: 1, max: 43 }).withMessage('Pomodoros must be an integer between 1 and 43').run(req)
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+  next();
+};
+
+async function validateWeekStart(req, res, next) {
+  await body('week-start')
+    .custom((value) => {
+      // Check if the date is in the correct format
+      const date = moment(value, 'YYYY-MM-DD HH:mm:ss', true);
+      if (!date.isValid()) throw new Error('Invalid date format, should be YYYY-MM-DD HH:mm:ss');
+      if (date.format('HH:mm:ss') !== '00:00:00') throw new Error('Time must be midnight (00:00:00)');
+      if (date.day() !== 1) throw new Error('Date must be a Monday');
+      if (date.isAfter(moment().startOf('day'))) throw new Error('Date cannot be in the future');
+      return true;
+    })
+    .run(req);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+  next();
+};
 
 module.exports = router;

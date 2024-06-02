@@ -11,7 +11,7 @@ router.put('/signIn', cors(corsOptions), verifyToken, async (req, res, next) => 
     if (!user) {
       return res.status(404).send({ message: 'Could not sign in' });
     }
-    res.send({ user });
+    res.status(200).send({ user });
   } catch (error) {
     console.error('Error signing in user:', error);
     res.status(500).send({ message: 'Internal server error' });
@@ -24,7 +24,7 @@ router.get('/getUser', cors(corsOptions), verifyToken, async (req, res) => {
     if (!user) {
       return res.status(404).send({ message: 'User not found' });
     }
-    res.send({ user });
+    res.status(200).send({ user });
   } catch {
     console.error('Error retrieving user:', error);
     res.status(500).send({ message: 'Internal server error' });
