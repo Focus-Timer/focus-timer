@@ -142,7 +142,7 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
 
 #Import cert with arn
 resource "aws_acm_certificate" "cert" {
-  arn = "arn:aws:acm:${var.region}:${var.account_number}:certificate/${var.certificate}"
+  arn = "arn:aws:acm:eu-west-1:574836245203:certificate/51456bea-3d96-4f9d-a893-904c29d58afe"
 }
 
 # Load Balancer
