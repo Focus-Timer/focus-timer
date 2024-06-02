@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,100;1,200;1,300&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #1f3543;
+}
+
+
+
+.signup-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Align items to the center */
+    width: 100%;
+    margin-bottom: 2rem; /* Space between logo and form */
+}
+
+.logo-image {
+    height: 20vh;
+    width: auto; /* Maintain aspect ratio */
+}
+
+.form {
+    position: relative;
+    filter: drop-shadow(0 0 0.125rem #000000);
+    border-radius: 2.1875rem;
+    width: 90%;
+    max-width: 22.5rem;
+    background-color: #ffffff;
+    padding: 2.5rem;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 2.5rem; /* Ensure space for the image */
+}
+
+.password-wrapper img {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    height: 1.25rem;
+    cursor: pointer;
+}
+
+.form input {
+    outline: 0;
+    background: #f2f2f2;
+    border-radius: 0.25rem;
+    width: 100%;
+    border: 0;
+    margin: 0.9375rem 0;
+    padding: 0.9375rem;
+    font-size: 0.875rem;
+}
+
+.form input:focus {
+    box-shadow: 0 0 0.3125rem 0 rgb(31, 53, 67);
+}
+
+span {
+    color: red;
+    margin: 0.625rem 0;
+    font-size: 0.875rem;
+}
+
+.form button {
+    outline: 0;
+    background: #1f3543;
+    width: 100%;
+    border: 0;
+    margin-top: 0.625rem;
+    border-radius: 0.1875rem;
+    padding: 0.9375rem;
+    color: #ffffff;
+    font-size: 0.9375rem;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: black;
+    color: #fff;
+}
+
+.message {
+    margin: 0.9375rem 0;
+    text-align: center;
+}
+
+.form .message a {
+    font-size: 0.875rem;
+    color: #1f3543;
+    text-decoration: none;
+}

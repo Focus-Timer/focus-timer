@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/signup.css">
+    <script src="javascripts/signup.js" defer></script>
+    <title>Sign Up Form</title>
+</head>
+<body>
+<div class="signup-page">
+    <div class="logo-container">
+        <img src="resources/loginLogo.svg" alt = "Logo" class = "logo-image"/>
+    </div>
+    <div class="form">
+        <form class="signup-form" action="https://www.instagram.com/codewith_random/" target="_blank">
+            <h2>CREATE A NEW ACCOUNT</h2>
+            <input oninput="return formvalid()" type="text" required placeholder="Email" id="user" autocomplete="off" />
+            <span id="valid-user"></span>
+            <div class="password-wrapper">
+                <input oninput="return formvalid()" type="password" required placeholder="Password" id="pass" autocomplete="off" />
+                <img src="https://cdn2.iconfinder.com/data/icons/basic-ui-interface-v-2/32/hide-512.png" onclick="show('pass')" id="showing">
+            </div>
+            <span id="valid-pass"></span>
+            <div class="password-wrapper">
+                <input oninput="return formvalid()" type="password" required placeholder="Confirm Password" id="confirm-pass" autocomplete="off" />
+                <img src="https://cdn2.iconfinder.com/data/icons/basic-ui-interface-v-2/32/hide-512.png" onclick="show('confirm-pass')" id="showing-confirm-pass">
+            </div>
+            <span id="valid-confirm-pass"></span>
+            <button type="submit">SIGN UP</button>
+            <p class="message">Already a user? <a href="#" onclick="redirectToLogin()">Sign in</a></p>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

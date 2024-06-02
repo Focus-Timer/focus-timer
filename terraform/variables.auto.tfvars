@@ -5,6 +5,8 @@ mandatory_tags = {
 
 account_number = "574836245203"
 
+certificate = "51456bea-3d96-4f9d-a893-904c29d58afe"
+
 repo = "Focus-Timer/focus-timer"
 
 region = "eu-west-1"

@@ -1,0 +1,52 @@
+.countdown-section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4em;
+  align-items: center;
+}
+
+.buttons-section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4em;
+  align-items: flex-start;
+}
+
+.countdown-container {
+    display: flex;
+    gap: 4em;
+    justify-content: space-between;
+}
+
+.minutes-container, 
+.seconds-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #375466;
+  border: 0.3125em solid white;
+  color: white;
+  width: 16em;
+  height: 16em;
+  border-radius: 50%;
+}
+
+.minutes,
+.seconds {
+  font-size: 2.5em; 
+}
+
+.minutes-label,
+.seconds-label {
+  text-transform: uppercase;
+  margin-bottom: 0.3125em;
+}
+
+.timer-btn:hover {
+  background-color: #375466;
+  color: white;
+}
+
