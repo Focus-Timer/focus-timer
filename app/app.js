@@ -53,7 +53,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-if (false) { //process.env.MODE === 'local' || process.env.MODE === 'debug') {
+if (process.env.MODE === 'local' || process.env.MODE === 'debug') {
   const key = fs.readFileSync('./certs/localhost.decrypted.key');
   const cert = fs.readFileSync('./certs/localhost.crt');
   const server = https.createServer({ key, cert }, app);

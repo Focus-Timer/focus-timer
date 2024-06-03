@@ -57,6 +57,36 @@ resource "aws_route_table_association" "route_table_association" {
   route_table_id = aws_route_table.route_table.id
 }
 
+# NAT Gateway Elastic IP
+resource "aws_eip" "nat_eip" {
+  domain = "vpc"
+}
+
+# NAT Gateway
+resource "aws_nat_gateway" "nat_gateway" {
+  allocation_id = aws_eip.nat_eip.id
+  subnet_id     = aws_subnet.public_subnets[0].id
+  tags          = merge(var.mandatory_tags, { Name = "${var.project_name}-nat-gateway" })
+}
+
+# Private Routing table
+resource "aws_route_table" "private_route_table" {
+  vpc_id = aws_vpc.vpc.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat_gateway.id
+  }
+  tags = merge(var.mandatory_tags, { Name = "${var.project_name}-private-route-table" })
+}
+
+# Associate private subnets with the private route table
+resource "aws_route_table_association" "private_route_table_association" {
+  count          = length(aws_subnet.private_subnets)
+  subnet_id      = aws_subnet.private_subnets[count.index].id
+  route_table_id = aws_route_table.private_route_table.id
+}
+
 #Check this
 resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "${var.project_name}-subnet-group"
@@ -104,7 +134,7 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = join(",", aws_subnet.public_subnets[*].id)
+    value     = join(",", aws_subnet.private_subnets[*].id)
   }
   setting {
     namespace = "aws:ec2:vpc"
@@ -116,11 +146,11 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
     name      = "InstanceTypes"
     value     = "t3.micro"
   }
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "AssociatePublicIpAddress"
-    value     = true
-  }
+  # setting {
+  #   namespace = "aws:ec2:vpc"
+  #   name      = "AssociatePublicIpAddress"
+  #   value     = true
+  # }
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MaxSize"
