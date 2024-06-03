@@ -1,0 +1,49 @@
+#session-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: none;
+    border-radius: 0.375em; 
+    padding: 0.625em 1.5625em; 
+    transform: translate(-50%,-50%) scale(.9); 
+    background-color: #D9D9D9;
+    max-width: 70%;
+    max-height: 95%;
+    overflow: auto;
+    visibility: hidden;
+}
+
+.session-header {
+    color: #375466;
+    font-size: 1.5em;
+    font-weight: 650;
+}
+
+.session-text {
+    color: #375466;
+    font-size: 1em;
+}
+
+.session-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5em;
+}
+
+.session-cancel-btn {
+    background-color: transparent;
+    border: 0.1em solid #375466;
+    color: #375466;
+    padding: 0.25em;
+}
+
+.session-confirm-btn {
+    background-color: #375466 ;
+    border: 0.1em solid #375466;
+    color: white;
+    padding: 0.25em;
+}

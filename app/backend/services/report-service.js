@@ -37,7 +37,7 @@ async function postReport(user, pomodoros) {
     const now = new Date();
     const hoursAfterMidnight = now.getHours();
 
-    const pomodoroHours = Math.floor(pomodoros / 4) * 2.25 + Math.floor(pomodoros % 4) * 0.5;
+    const pomodoroHours = Math.floor(pomodoros / 4) * 2.167 + Math.floor(pomodoros % 4) * 0.5;
     const currentDaysPomodoros = await getCurrentDaysReport(user, now);
 
     if (pomodoroHours < hoursAfterMidnight && pomodoros < (43 - currentDaysPomodoros.pomodorosTotal)) {

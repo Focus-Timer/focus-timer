@@ -32,6 +32,11 @@ main {
   text-decoration: line-through
 }
 
+.blur {
+  filter: blur(0.9em);
+  pointer-events: none;
+}
+
 button {
   background-color: white;
   color: #1F3543;
