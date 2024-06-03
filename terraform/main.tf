@@ -124,8 +124,13 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "EnvironmentType"
-    value     = "SingleInstance"
+    value     = "LoadBalanced"
   }
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:environment"
+  #   name      = "LoadBalancerType"
+  #   value     = "application"
+  # }
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "ServiceRole"
@@ -138,39 +143,67 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
     value     = "basic"
   }
 
-  # Add these settings for the ACM certificate
   setting {
-    namespace = "aws:elbv2:listener:443"
+    namespace = "aws:elbv2:listener:80"
+    name      = "DefaultProcess"
+    value     = "default"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "Protocol"
+    value     = "HTTP"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "Rules"
+    value     = "default"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
     name      = "ListenerEnabled"
     value     = "true"
   }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "DefaultProcess"
+    value     = "default"
+  }
+
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "Protocol"
     value     = "HTTPS"
   }
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "SSLCertificateArns"
-    value     = aws_acm_certificate.cert.arn
-  }
+
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "Rules"
     value     = "default"
   }
 
-  # Optional: redirect HTTP to HTTPS
   setting {
-    namespace = "aws:elbv2:listener:80"
+    namespace = "aws:elbv2:listener:443"
     name      = "ListenerEnabled"
     value     = "true"
   }
+
   setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "Protocol"
-    value     = "HTTP"
+    namespace = "aws:elbv2:listener:443"
+    name      = "SSLPortProtocol"
+    value     = "SSL"
   }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "SSLCertificateArns"
+    value     = aws_acm_certificate.cert.arn # Replace with your SSL certificate ARN
+  }
+
+  # Optional: redirect HTTP to HTTPS
   setting {
     namespace = "aws:elbv2:listener:80"
     name      = "Rules"
