@@ -31,7 +31,7 @@ npm run start
 ### Running local docker production environment
 ```sh
 cd app
-docker compose down
+npm install
 sudo docker compose up --build -d
 docker compose down #To terminate
 ```
@@ -59,6 +59,7 @@ USERPOOLID=eu-west-1_IKRz0uOSt
 Run the following commands
 ```sh
 cd app
+npm install
 sudo docker compose -f ./docker-compose.local.yml up --build -d
 docker compose -f ./docker-compose.local.yml down #To terminate
 ```
