@@ -107,9 +107,30 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
     value     = join(",", aws_subnet.public_subnets[*].id)
   }
   setting {
+    namespace = "aws:ec2:vpc"
+    name      = "ELBSubnets"
+    value     = join(",", aws_subnet.public_subnets[*].id)
+  }
+  setting {
     namespace = "aws:ec2:instances"
     name      = "InstanceTypes"
     value     = "t3.micro"
+  }
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "AssociatePublicIpAddress"
+    value     = true
+  }
+  setting {
+    namespace = "aws:autoscaling:asg"
+    name      = "MaxSize"
+    value     = "2"
+  }
+
+  setting {
+    namespace = "aws:elbv2:loadbalancer"
+    name      = "IdleTimeout"
+    value     = "60"
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -123,14 +144,10 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
   }
   setting {
     namespace = "aws:elasticbeanstalk:environment"
-    name      = "EnvironmentType"
-    value     = "LoadBalanced"
+    name      = "LoadBalancerType"
+    value     = "application"
   }
-  # setting {
-  #   namespace = "aws:elasticbeanstalk:environment"
-  #   name      = "LoadBalancerType"
-  #   value     = "application"
-  # }
+
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "ServiceRole"
@@ -141,6 +158,18 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
     namespace = "aws:elasticbeanstalk:healthreporting:system"
     name      = "SystemType"
     value     = "basic"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "Protocol"
+    value     = "HTTPS"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "ListenerEnabled"
+    value     = "true"
   }
 
   setting {
@@ -157,110 +186,31 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
 
   setting {
     namespace = "aws:elbv2:listener:80"
-    name      = "Rules"
-    value     = "default"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:80"
     name      = "ListenerEnabled"
     value     = "true"
   }
 
   setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "DefaultProcess"
-    value     = "default"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "Protocol"
-    value     = "HTTPS"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "Rules"
-    value     = "default"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "ListenerEnabled"
-    value     = "true"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "SSLPortProtocol"
-    value     = "SSL"
+    namespace = "aws:elbv2:loadbalancer"
+    name      = "SecurityGroups"
+    value     = aws_security_group.eb_security_group_lb.id
   }
 
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "SSLCertificateArns"
-    value     = aws_acm_certificate.cert.arn # Replace with your SSL certificate ARN
+    value     = "arn:aws:acm:eu-west-1:574836245203:certificate/51456bea-3d96-4f9d-a893-904c29d58afe" # Replace with your SSL certificate ARN
   }
 
   # Optional: redirect HTTP to HTTPS
-  setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "Rules"
-    value     = "path-pattern / -> forward: 443, path-pattern /* -> redirect: https://rudolph-sucks.projects.bbdgrad.com#{path}?#{query}"
-  }
+  # setting {
+  #   namespace = "aws:elbv2:listener:80"
+  #   name      = "Rules"
+  #   value     = "path-pattern / -> forward: 443, path-pattern /* -> redirect: https://rudolph-sucks.projects.bbdgrad.com#{path}?#{query}"
+  # }
 
-  # depends_on to ensure the certificate is validated before creating the environment
-  depends_on = [aws_acm_certificate_validation.cert_validation]
-  # depends_on = [aws_db_instance.sql_server, aws_s3_bucket.source]
 }
 
-resource "aws_acm_certificate" "cert" {
-  domain_name       = "rudolph-sucks.projects.bbdgrad.com"
-  validation_method = "DNS"
-
-  tags = merge(var.mandatory_tags, { Name = "${var.project_name}-cert" })
-}
-
-resource "aws_acm_certificate_validation" "cert_validation" {
-  certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = ["_a7742609373876db4121cef41e9a10ba.rudolph-sucks.projects.bbdgrad.com"]
-}
-
-# #Import cert with arn
-# resource "aws_acm_certificate" "cert" {
-#   domain_name = "rudolph-sucks.projects.bbdgrad.com"
-#   arn         = "arn:aws:acm:eu-west-1:574836245203:certificate/51456bea-3d96-4f9d-a893-904c29d58afe"
-# }
-
-
-# Load Balancer
-# resource "aws_lb" "example" {
-#   name               = "${var.project_name}-lb"
-#   internal           = false
-#   load_balancer_type = "application"
-#   security_groups    = [aws_security_group.lb_sg.id]
-#   subnets            = tolist(aws_subnet.public_subnets[*].id)
-# }
-
-# # Listener using the imported ACM certificate
-# resource "aws_lb_listener" "https" {
-#   load_balancer_arn = aws_lb.example.arn
-#   port              = "443"
-#   protocol          = "HTTPS"
-
-#   ssl_policy      = "ELBSecurityPolicy-2016-08"
-#   certificate_arn = aws_acm_certificate.cert.arn
-
-#   default_action {
-#     type = "fixed-response"
-#     fixed_response {
-#       content_type = "text/plain"
-#       message_body = "404: Not Found"
-#       status_code  = "404"
-#     }
-#   }
-# }
 
 
 
