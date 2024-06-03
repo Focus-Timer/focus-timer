@@ -174,7 +174,7 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
   setting {
     namespace = "aws:elbv2:listener:80"
     name      = "Rules"
-    value     = "path-pattern / -> forward: 443, path-pattern /* -> redirect: https://#{host}#{path}?#{query}"
+    value     = "path-pattern / -> forward: 443, path-pattern /* -> redirect: https://rudolph-sucks.projects.bbdgrad.com#{path}?#{query}"
   }
 
   # depends_on to ensure the certificate is validated before creating the environment
