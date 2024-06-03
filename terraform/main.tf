@@ -137,42 +137,97 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
     name      = "SystemType"
     value     = "basic"
   }
+
+  # Add these settings for the ACM certificate
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "ListenerEnabled"
+    value     = "true"
+  }
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "Protocol"
+    value     = "HTTPS"
+  }
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "SSLCertificateArns"
+    value     = aws_acm_certificate.cert.arn
+  }
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "Rules"
+    value     = "default"
+  }
+
+  # Optional: redirect HTTP to HTTPS
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "ListenerEnabled"
+    value     = "true"
+  }
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "Protocol"
+    value     = "HTTP"
+  }
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "Rules"
+    value     = "path-pattern / -> forward: 443, path-pattern /* -> redirect: https://#{host}#{path}?#{query}"
+  }
+
+  # depends_on to ensure the certificate is validated before creating the environment
+  depends_on = [aws_acm_certificate_validation.cert_validation]
   # depends_on = [aws_db_instance.sql_server, aws_s3_bucket.source]
 }
 
-#Import cert with arn
 resource "aws_acm_certificate" "cert" {
   domain_name       = "rudolph-sucks.projects.bbdgrad.com"
-  arn               = "arn:aws:acm:eu-west-1:574836245203:certificate/51456bea-3d96-4f9d-a893-904c29d58afe"
+  validation_method = "DNS"
+
+  tags = merge(var.mandatory_tags, { Name = "${var.project_name}-cert" })
 }
+
+resource "aws_acm_certificate_validation" "cert_validation" {
+  certificate_arn         = aws_acm_certificate.cert.arn
+  validation_record_fqdns = ["_a7742609373876db4121cef41e9a10ba.rudolph-sucks.projects.bbdgrad.com"]
+}
+
+# #Import cert with arn
+# resource "aws_acm_certificate" "cert" {
+#   domain_name = "rudolph-sucks.projects.bbdgrad.com"
+#   arn         = "arn:aws:acm:eu-west-1:574836245203:certificate/51456bea-3d96-4f9d-a893-904c29d58afe"
+# }
+
 
 # Load Balancer
-resource "aws_lb" "example" {
-  name               = "${var.project_name}-lb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.lb_sg.id]
-  subnets            = tolist(aws_subnet.public_subnets[*].id)
-}
+# resource "aws_lb" "example" {
+#   name               = "${var.project_name}-lb"
+#   internal           = false
+#   load_balancer_type = "application"
+#   security_groups    = [aws_security_group.lb_sg.id]
+#   subnets            = tolist(aws_subnet.public_subnets[*].id)
+# }
 
-# Listener using the imported ACM certificate
-resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.example.arn
-  port              = "443"
-  protocol          = "HTTPS"
+# # Listener using the imported ACM certificate
+# resource "aws_lb_listener" "https" {
+#   load_balancer_arn = aws_lb.example.arn
+#   port              = "443"
+#   protocol          = "HTTPS"
 
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = aws_acm_certificate.cert.arn
+#   ssl_policy      = "ELBSecurityPolicy-2016-08"
+#   certificate_arn = aws_acm_certificate.cert.arn
 
-  default_action {
-    type             = "fixed-response"
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "404: Not Found"
-      status_code  = "404"
-    }
-  }
-}
+#   default_action {
+#     type = "fixed-response"
+#     fixed_response {
+#       content_type = "text/plain"
+#       message_body = "404: Not Found"
+#       status_code  = "404"
+#     }
+#   }
+# }
 
 
 
