@@ -40,10 +40,10 @@ async function postReport(user, pomodoros) {
     const pomodoroHours = Math.floor(pomodoros / 4) * 2.167 + Math.floor(pomodoros % 4) * 0.5;
     const currentDaysPomodoros = await getCurrentDaysReport(user, now);
 
-    if (pomodoroHours < hoursAfterMidnight && pomodoros < (43 - currentDaysPomodoros.pomodorosTotal)) {
+    if (pomodoroHours < hoursAfterMidnight && pomodoros < (44 - currentDaysPomodoros.pomodorosTotal)) {
       const reportInfo = await pool.request()
         .input("userid", sql.VarChar(255), user.sub)
-        .input("pomodoros", sql.Int, pomodoros)
+        .input("pomodoros", sql.Decimal(4, 2), pomodoros)
         .query('INSERT INTO report (userId, pomodoros) OUTPUT inserted.id, inserted.userid, inserted.pomodoros VALUES (@userid, @pomodoros)');
       return reportInfo.recordsets[0];
 
