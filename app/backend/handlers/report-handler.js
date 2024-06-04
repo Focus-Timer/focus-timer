@@ -35,7 +35,7 @@ router.post('/postReport', cors(corsOptions), verifyToken, validatePomodoros, as
 
 //Validation 
 async function validatePomodoros(req, res, next) {
-  await body('pomodoros').isInt({ min: 1, max: 43 }).withMessage('Pomodoros must be an integer between 1 and 43').run(req)
+  await body('pomodoros').isFloat({ min: 1, max: 44.00 }).withMessage('Pomodoros must be a decimal to two decimal places between 1 and 44').run(req)
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   next();

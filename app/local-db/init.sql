@@ -28,10 +28,10 @@ CREATE TABLE users (
 CREATE TABLE report (
     id INT PRIMARY KEY IDENTITY(1,1),
     userid VARCHAR(255) NOT NULL,
-    pomodoros INT NOT NULL,
+    pomodoros DECIMAL(4,2) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (userid) REFERENCES users(userid),
-    CONSTRAINT CHK_Pomodoros CHECK (pomodoros > 0 AND pomodoros < 43) -- Max 43 pomodoros in a day 
+    CONSTRAINT CHK_Pomodoros CHECK (pomodoros > 0 AND pomodoros < 44.00) -- Max 44 pomodoros in a day 
 );
 
 -- Insert dummy data into the users table
