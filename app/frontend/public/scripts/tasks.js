@@ -142,9 +142,11 @@ document.addEventListener('click', function(event) {
             if (currentTaskItem === taskToDelete) {
                 if (taskList.length === 1) {
                     currentTaskItem = 0;
-                } else {
-                    (currentTaskItem + 1) < taskList.length ? currentTaskItem++ : currentTaskItem--;
+                } else if ((currentTaskItem + 1) >= taskList.length) {
+                     currentTaskItem--;
                 }
+            } else if (taskToDelete < currentTaskItem) {
+                currentTaskItem--;
             }
 
             // Delete task

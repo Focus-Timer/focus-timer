@@ -25,11 +25,16 @@ main {
 }
 
 .hide-component {
-  display: none;
+  display: none !important;
 }
 
 .strike-through h4 {
   text-decoration: line-through
+}
+
+.blur {
+  filter: blur(0.9em);
+  pointer-events: none;
 }
 
 button {

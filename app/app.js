@@ -63,6 +63,7 @@ if (false) { //process.env.MODE === 'local' || process.env.MODE === 'debug') {
 } else {
   app.listen(PORT, () => {
     console.log(`Server is listening over HTTP on http://localhost:${PORT}`);
+
   });
 }
 

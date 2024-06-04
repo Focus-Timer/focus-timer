@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return result;
     }
-
     // Extract tokens
     const tokens = getTokensFromUrl();
     if (tokens.id_token && tokens.access_token) {
@@ -25,5 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('Tokens extracted and stored securely');
     } else {
         console.error('Tokens not found in URL');
+        alert('You are not logged in. Login using Google to continue.')
+        window.location.href = '/login';
     }
 });
