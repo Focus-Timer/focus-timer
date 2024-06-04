@@ -1,6 +1,7 @@
 var { getPool } = require('../config/db.js')
 var sql = require('mssql');
 const moment = require('moment');
+const { report } = require('../handlers/other.js');
 
 async function getReport(user, weekStart) {
   try {
@@ -59,11 +60,11 @@ async function postReport(user, pomodoros) {
   }
 }
 
-async function getCurrentDaysReport(user, weekStart) {
+async function getCurrentDaysReport(user, day) {
   try {
     const pool = await getPool();
-    const startDate = moment(weekStart).startOf('day');
-    const endDate = moment(weekStart).endOf('day');
+    const startDate = moment(day).startOf('day');
+    const endDate = moment(day).endOf('day');
     const reportInfo = await pool.request()
       .input('userid', sql.VarChar(255), user.sub)
       .input('startDate', sql.DateTime, startDate.toDate())
@@ -79,6 +80,7 @@ async function getCurrentDaysReport(user, weekStart) {
           GROUP BY CAST(report.date AS DATE)
           ORDER BY date;
     `);
+    if (reportInfo.recordsets[0].length === 0) return { pomodorosTotal: 0 };
     return reportInfo.recordsets[0][0];
   } catch (error) {
     console.error(error);
