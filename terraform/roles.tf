@@ -28,6 +28,11 @@ resource "aws_iam_role_policy_attachment" "elastic_beanstalk_managed_updates_pol
   role       = aws_iam_role.eb_service_role.name
 }
 
+resource "aws_iam_role_policy_attachment" "eb_acm_role_policy_attachment" {
+  policy_arn = "arn:aws:iam::aws:policy/AWSCertificateManagerFullAccess"
+  role       = aws_iam_role.eb_service_role.name
+}
+
 
 data "aws_iam_policy_document" "ec2_assume_role" {
   statement {
