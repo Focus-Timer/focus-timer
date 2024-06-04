@@ -38,7 +38,8 @@ jobs:
           echo "DB_NAME=${{ secrets.DB_NAME}}" >> .env
           echo "DB_ENDPOINT=${{ secrets.DB_ENDPOINT}}" >> .env
           echo "AWS_REGION=${{ secrets.AWS_REGION}}" >> .env
-      
+          echo "LOCAL_URL=${{'https://localhost:443'}}" >> .env
+          echo "HOSTED_URL=${{'https://rudolph-sucks.projects.bbdgrad.com'}}" >> .env
     - name: Package artifact
       run: zip -r ./app.zip .env .dockerignore *
       working-directory: app
