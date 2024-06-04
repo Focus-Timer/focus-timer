@@ -139,7 +139,6 @@ document.addEventListener('click', function(event) {
             }
         } else if (taskToDelete !== -1) {
             // Update current task
-            console.log('Before: ' + currentTaskItem);
             if (currentTaskItem === taskToDelete) {
                 if (taskList.length === 1) {
                     currentTaskItem = 0;
@@ -149,7 +148,6 @@ document.addEventListener('click', function(event) {
             } else if (taskToDelete < currentTaskItem) {
                 currentTaskItem--;
             }
-            console.log('After: ' + currentTaskItem);
 
             // Delete task
             taskListComponent.children[taskToDelete].remove();

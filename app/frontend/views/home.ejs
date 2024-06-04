@@ -9,11 +9,14 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/timer.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/tasks.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/report.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/session.css">
   <script src ="scripts/tokenParser.js" defer></script>
   <script src="scripts/elements.js" defer></script>
   <script src="scripts/timer.js" defer></script>
   <script src="scripts/tasks.js" defer></script>
   <script src="scripts/report.js" defer></script>
+  <script src="scripts/session.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <body>
@@ -23,6 +26,7 @@
       <h2>FOCUS POCUS</h2>
     </section>
     <section class="header-button-container">
+      <button class="save-session-btn">Save Session</button>
       <button class="show-report-btn">Report</button>
       <a href = "https://focuspocus.auth.eu-west-1.amazoncognito.com/logout?logout_uri=https://rudolph-sucks.projects.bbdgrad.com&client_id=<%= clientId %>">
         <button class="log-out-btn">Log Out</button>
@@ -90,24 +94,26 @@
         <button class="add-task-btn">Add Task</button>
       </div>
     </article>
+  
+  </main>
 
-    <dialog id="report-dialog" >
-      <header class="report-header">
-        <svg class="close-report-btn" width="1.5em" height="1.5em" viewbox="0 0 40 40"><path d="M 10,10 L 30,30 M 30,10 L 10,30" stroke="#375466" stroke-width="4" /></svg>
-      </header>
-      
-      <section class="report-categories">
-        <button>Summary</button>
-        <button>Detail</button>
-        <button>Ranking</button>
-      </section>
+  <dialog id="report-dialog" >
+    <header class="report-header">
+      <svg class="close-report-btn" width="1.5em" height="1.5em" viewbox="0 0 40 40"><path d="M 10,10 L 30,30 M 30,10 L 10,30" stroke="#375466" stroke-width="4" /></svg>
+    </header>
+    
+    <section class="report-categories">
+      <button id="report-summary-btn" class="report-button-active">Summary</button>
+      <button id="report-detail-btn">Detail</button>
+    </section>
 
-      <section class="activity-summary">
-        <h3> Activity Summary</h3>
-        <p class="line"></p>
-      </section>
+    <section class="report-content-container">
+      <h3 id="report-content-description"> Activity Summary</h3>
+      <p class="line"></p>
+    </section>
 
-      <section class="activity-summary">
+    <article id="report-content">
+      <section class="report-content-container">
         <div class="activity-card">
           <div class="activity-card--left">
             <svg width="70" height="70" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +123,7 @@
             </svg>
           </div>
           <div class="activity-card--right">
-            <h3>12</h3>
+            <h3>0</h3>
             <p>hours focused</p>
           </div>
         </div>
@@ -134,7 +140,7 @@
             </svg>              
           </div>
           <div class="activity-card--right">
-            <h3>7</h3>
+            <h3>0</h3>
             <p>days accessed</p>
           </div>
         </div>
@@ -151,23 +157,25 @@
               </svg>              
           </div>
           <div class="activity-card--right">
-            <h3>2</h3>
+            <h3>0</h3>
             <p>day streak</p>
           </div>
         </div>
-      </section>
-
-      <footer class="report-footer">
-        <button>Week</button>
-        <button>Month</button>
-      </footer>
       
-    </dialog>
+    </section>
+    </article>
     
+    
+  </dialog>
 
-  </main>
-
-  
+  <dialog id="session-dialog" >
+    <h3 class="session-header">Are you sure you want to save the session?</h3>
+    <p class="session-text">Note that all your tasks will be cleared and the session will be reset.</p>
+    <footer class="session-footer">
+      <button class="session-cancel-btn">Cancel</button>
+      <button class="session-confirm-btn">Yes I'm sure. Thanks for the heads-up</button>
+    </footer>
+  </dialog>
 
 </body>
 
