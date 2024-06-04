@@ -14,15 +14,16 @@ closeReportButton.onclick = () => {
     reportDialog.style.visibility = 'hidden';
 }
 
-prevWeekButton.onclick = () => {
-    currentWeekStart -= 7;
-    updateChart();
-}
+// TODO
+// prevWeekButton.onclick = () => {
+//     currentWeekStart -= 7;
+//     updateChart();
+// }
                             
-nextWeekButton.onclick = () => {
-    currentWeekStart += 7;
-    updateChart();
-}
+// nextWeekButton.onclick = () => {
+//     currentWeekStart += 7;
+//     updateChart();
+// }
 
 reportSummaryButton.onclick = () => {
     reportContentDescription.textContent = 'Activity Summary';
@@ -102,6 +103,7 @@ function updateChart() {
     console.log(firstday);
     console.log(lastday);
     // MAKE API CALL WITH formatDate(firstDay) to populate y-values
+    // Update week description below chart as well
     const yValues = [1, 0, 0, 3, 5, 12, 18];
     new Chart("focus-hours-chart", {
         type: "line",
