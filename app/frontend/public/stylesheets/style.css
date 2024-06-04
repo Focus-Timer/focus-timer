@@ -25,7 +25,7 @@ main {
 }
 
 .hide-component {
-  display: none;
+  display: none !important;
 }
 
 .strike-through h4 {

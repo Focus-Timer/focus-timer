@@ -96,7 +96,7 @@ timerButton.onclick = () => {
   if (timerButton.textContent === 'Start') {
     countDownClock(Number(minutesElement.textContent), Number(secondsElement.textContent));
     timerButton.textContent = 'Stop';
-    skipButton.style.visibility = 'visible'
+    skipButton.style.visibility = 'visible';
   } else if (timerButton.textContent === 'Stop') {
     clearInterval(countdown);
     timerButton.textContent = 'Start';
