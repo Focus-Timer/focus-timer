@@ -20,7 +20,7 @@ async function signIn(user) {
     const pool = await getPool();
     const userInfo = await pool.request()
       .input('userid', sql.VarChar(255), user.sub)
-      .input('username', sql.VarChar(255), user.email)
+      .input('username', sql.VarChar(255), user.name)
       .query(`IF NOT EXISTS (select * from users where userid=@userid)
               BEGIN
                 INSERT INTO users (userid, username)
