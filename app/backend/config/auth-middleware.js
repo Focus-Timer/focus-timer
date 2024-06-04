@@ -19,7 +19,7 @@ function verifyToken(req, res, next) {
     const jwksClient = jwksRsa({
       cache: true,
       rateLimit: true,
-      jwksUri: `https://cognito-idp.{process.env.AWS_REGION}.amazonaws.com/{userpoolid}/.well-known/jwks.json` // Replace with User Pool ID
+      jwksUri: `https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.USER_POOL_ID}/.well-known/jwks.json` // Replace with User Pool ID
     });
 
     function getKey(header, callback) {
@@ -34,8 +34,8 @@ function verifyToken(req, res, next) {
     }
 
     jwt.verify(token, getKey, {
-      audience: 'your_client_id', // Replace with Cognito App Client ID
-      issuer: `https://cognito-idp.{process.env.AWS_REGION}.amazonaws.com/{userpoolid}`, // Replace with User Pool ID
+      audience: `${process.env.CLIENT_ID}`, // Replace with Cognito App Client ID
+      issuer: `https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.USER_POOL_ID}`, // Replace with User Pool ID
       algorithms: ['RS256']
     }, (err, decoded) => {
       if (err) {
