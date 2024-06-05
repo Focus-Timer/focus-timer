@@ -56,6 +56,13 @@ DB_USERNAME=db_user
 DB_PORT=1433
 USERPOOLID=eu-west-1_IKRz0uOSt
 ```
+Trust the server cert
+```
+Double-click the certificate
+Click on the Install Certificate
+Select Current User
+And place the cert in Trusted Root Certification Authorities
+```
 Run the following commands
 ```sh
 cd app
