@@ -47,14 +47,7 @@ wsl hostname -I
 ```
 Define a .env file like so in the app directory
 ```.env
-PORT_LOCAL=443
-MODE=local
 DB_ENDPOINT={wsl endpoint}
-DB_PASSWORD=StrongPassword123*
-DB_NAME=FocusTimer
-DB_USERNAME=db_user
-DB_PORT=1433
-USERPOOLID=eu-west-1_IKRz0uOSt
 ```
 Run the following commands
 ```sh
