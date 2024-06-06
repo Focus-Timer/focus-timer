@@ -7,7 +7,7 @@ function verifyToken(req, res, next) {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
   if (debug_mode) {
-    req.user = { sub: req.headers.authorization, username: "developer" };
+    req.user = { sub: req.headers.authorization, name: "developer" };
     return next();
   }
 

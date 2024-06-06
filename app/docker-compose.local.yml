@@ -15,6 +15,7 @@ services:
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: focus-db
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=StrongPassword123#
