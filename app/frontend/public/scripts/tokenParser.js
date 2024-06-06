@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Store tokens securely
         sessionStorage.setItem('id_token', tokens.id_token);
         sessionStorage.setItem('access_token', tokens.access_token);
-        console.log(sessionStorage.getItem('id_token'));
         response = await fetch(`${url}/api/user/signIn`, {
             method: "PUT",
             headers: {
