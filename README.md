@@ -49,6 +49,13 @@ Define a .env file like so in the app directory
 ```.env
 DB_ENDPOINT={wsl endpoint}
 ```
+Trust the server cert
+```
+Double-click the certificate
+Click on the Install Certificate
+Select Current User
+And place the cert in Trusted Root Certification Authorities
+```
 Run the following commands
 ```sh
 cd app
