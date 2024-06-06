@@ -4,9 +4,9 @@ const cors = require("cors");
 const corsOptions = require('../config/cors-middleware.js');
 var verifyToken = require('../config/auth-middleware.js');
 var UserService = require('../services/user-service.js');
-const authenticateSession = require('../config/auth-middleware.js');
+// const authenticateSession = require('../config/auth-middleware.js');
 
-router.put('/signIn', cors(corsOptions), authenticateSession, async (req, res, next) => {
+router.put('/signIn', cors(corsOptions), verifyToken, async (req, res, next) => {
   try {
     const user = await UserService.signIn(req.user);
     if (!user) {
@@ -19,7 +19,7 @@ router.put('/signIn', cors(corsOptions), authenticateSession, async (req, res, n
   }
 });
 
-router.get('/getUser', cors(corsOptions), authenticateSession, async (req, res) => {
+router.get('/getUser', cors(corsOptions), verifyToken, async (req, res) => {
   try {
     const user = await UserService.getUser(req.user);
     if (!user) {

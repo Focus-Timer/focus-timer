@@ -6,9 +6,9 @@ const corsOptions = require('../config/cors-middleware.js');
 var verifyToken = require('../config/auth-middleware.js');
 var ReportService = require('../services/report-service.js');
 const moment = require('moment');
-const authenticateSession = require('../config/auth-middleware.js');
+// const authenticateSession = require('../config/auth-middleware.js');
 
-router.get('/getReport', cors(corsOptions), authenticateSession, validateWeekStart, async (req, res) => {
+router.get('/getReport', cors(corsOptions), verifyToken, validateWeekStart, async (req, res) => {
   try {
     const report = await ReportService.getReport(req.user, req.body['week-start']);
     if (!report) {
@@ -21,7 +21,7 @@ router.get('/getReport', cors(corsOptions), authenticateSession, validateWeekSta
   }
 });
 
-router.post('/postReport', cors(corsOptions), authenticateSession, validatePomodoros, async (req, res) => {
+router.post('/postReport', cors(corsOptions), verifyToken, validatePomodoros, async (req, res) => {
   try {
     const report = await ReportService.postReport(req.user, req.body['pomodoros']);
     if (!report) {
@@ -43,14 +43,12 @@ async function validatePomodoros(req, res, next) {
 };
 
 async function validateWeekStart(req, res, next) {
-  const weekStart = req.query['week-start']; // Access week-start from query parameters
+  const weekStart = req.query['week-start'];
 
-  // Check if week-start is present
   if (!weekStart) {
     return res.status(400).json({ errors: [{ msg: 'Missing week-start parameter' }] });
   }
 
-  // Validate the week-start format using moment
   try {
     const date = moment(weekStart, 'YYYY-MM-DD HH:mm:ss', true);
     if (!date.isValid()) throw new Error('Invalid date format, should be YYYY-MM-DD HH:mm:ss');
@@ -61,25 +59,7 @@ async function validateWeekStart(req, res, next) {
     return res.status(400).json({ errors: [{ msg: error.message }] });
   }
 
-  // If validation passes, continue to next middleware
   next();
 };
-
-// async function validateWeekStart(req, res, next) {
-//   await body('week-start')
-//     .custom((value) => {
-//       // Check if the date is in the correct format
-//       const date = moment(value, 'YYYY-MM-DD HH:mm:ss', true);
-//       if (!date.isValid()) throw new Error('Invalid date format, should be YYYY-MM-DD HH:mm:ss');
-//       if (date.format('HH:mm:ss') !== '00:00:00') throw new Error('Time must be midnight (00:00:00)');
-//       if (date.day() !== 1) throw new Error('Date must be a Monday');
-//       if (date.isAfter(moment().startOf('day'))) throw new Error('Date cannot be in the future');
-//       return true;
-//     })
-//     .run(req);
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-//   next();
-// };
 
 module.exports = router;
