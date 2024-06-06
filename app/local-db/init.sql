@@ -8,7 +8,7 @@ BEGIN
 END
 GO
 
--- Change the password of the sa user
+Change the password of the sa user
 ALTER LOGIN sa WITH PASSWORD = 'NewStrongPassword123#';
 GO
 

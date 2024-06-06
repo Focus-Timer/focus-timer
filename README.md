@@ -17,53 +17,22 @@ Hocus pocus, let's help you focus
 https://slproweb.com/download/Win64OpenSSL-3_2_1.exe
 
 ## Run-instructions
-### Running using https
-```sh
-Add MODE=secure to your .env file
-```
-### Running Single Page Application Web app
-```sh
-cd app
-npm install
-npm run start
-```
-
-### Running local docker production environment
-```sh
-cd app
-npm install
-sudo docker compose up --build -d
-docker compose down #To terminate
-```
 
 ### Running local docker testing environment
-Ensure that you have setup docker and docker-compose on your local machine in wsl 
+i. Ensure that you have setup docker and docker-compose on your local machine in wsl 
 ```sh
 https://cuteprogramming.blog/2023/05/21/using-docker-and-kubernetes-without-docker-desktop-on-windows-11/
 ```
-Retrieve your wsl endpoint
-```.sh
-wsl hostname -I
-```
-Define a .env file like so in the app directory
-```.env
-PORT_LOCAL=443
-MODE=local
-DB_ENDPOINT={wsl endpoint}
-DB_PASSWORD=StrongPassword123*
-DB_NAME=FocusTimer
-DB_USERNAME=db_user
-DB_PORT=1433
-USERPOOLID=eu-west-1_IKRz0uOSt
-```
-Trust the server cert
+ii. Trust the server cert
 ```
 Double-click the certificate
 Click on the Install Certificate
 Select Current User
 And place the cert in Trusted Root Certification Authorities
+Run in FireFox
 ```
-Run the following commands
+iii. Open wsl
+iv. Run the following commands
 ```sh
 cd app
 npm install
