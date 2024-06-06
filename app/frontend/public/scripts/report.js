@@ -47,11 +47,11 @@ reportDetailButton.onclick = () => {
     reportDetailButton.classList.add('report-button-active');
 }
 
-function updateChart() {
+async function updateChart() {
     var firstday = new Date(currentWeekStartDate.setDate(currentWeekStart));
     var lastday = new Date(currentWeekEndDate.setDate(currentWeekStart + 6));
     currentWeek.textContent = `${formatDate(firstday)} to ${formatDate(lastday)}`;
-    getAPIData(`${formatDate(firstday)} 00:00:00`);
+    await getAPIData(`${formatDate(firstday)} 00:00:00`);
     // MAKE API CALL WITH `formatDate(firstDay) 00:00:00` to populate y-values
     // Update week description below chart as well
     
@@ -88,9 +88,6 @@ async function getAPIData(mondayDate) {
         "Content-Type": "application/json"
       },
     });
-
-
-    console.log(response);
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
     }

@@ -1,53 +1,64 @@
-
 saveSessionButton.onclick = () => {
-    main.classList.add('blur');
-    sessionDialog.style.visibility = 'visible';
-}
+  main.classList.add("blur");
+  sessionDialog.style.visibility = "visible";
+};
 
 cancelSessionButton.onclick = () => {
-    main.classList.remove('blur');
-    sessionDialog.style.visibility = 'hidden';
-}
+  main.classList.remove("blur");
+  sessionDialog.style.visibility = "hidden";
+};
 
 confirmSessionButton.onclick = () => {
-    // BACKEND CALL TO SAVE SESSION
-    let totalPomodoros = 0.00;
-    taskList.forEach((task) => {
-        totalPomodoros += parseFloat(task.pomodorosCompleted);
-    });
-    postReport(totalPomodoros.toFixed(2));
+  // BACKEND CALL TO SAVE SESSION
+  let totalPomodoros = 0.0;
+  taskList.forEach((task) => {
+    totalPomodoros += parseFloat(task.pomodorosCompleted);
+  });
 
-    taskList = [];
-    taskListComponent.innerHTML = "";
-    taskToDelete = -1;
-    currentTaskItem = 0;
-    goToPomodoro();
-    main.classList.remove('blur');
-    sessionDialog.style.visibility = 'hidden';
+  if(totalPomodoros > 0.00)
+  {
+
+  try {
+    postReport(totalPomodoros.toFixed(2));
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-async function postReport(numPomodoros) {
+  taskList = [];
+  taskListComponent.innerHTML = "";
+  taskToDelete = -1;
+  currentTaskItem = 0;
+  goToPomodoro();
+  main.classList.remove("blur");
+  sessionDialog.style.visibility = "hidden";
+  tempPomodoro = 1;
+};
+
+const postReport = async (numPomodoros) => {
+  
     try {
-      response = await fetch(`https://localhost:443/api/report/postReport`, {
+      const response = await fetch(`https://localhost/api/report/postReport`, {
         method: "POST",
-        mode: "cors",
         headers: {
-          "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("id_token")}`,
         },
         body: JSON.stringify({
-            "pomodoros": numPomodoros
+          pomodoros: numPomodoros,
         }),
       });
   
-  
-      console.log(response);
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+  
       const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+
+    } catch (err) {
+      console.log(err);
     }
-  }
+
+ 
+};
+
