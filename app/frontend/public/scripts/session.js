@@ -1,3 +1,4 @@
+
 saveSessionButton.onclick = () => {
     main.classList.add('blur');
     sessionDialog.style.visibility = 'visible';
@@ -26,9 +27,8 @@ confirmSessionButton.onclick = () => {
 }
 
 async function postReport(numPomodoros) {
-    console.log(sessionStorage.getItem('id_token'));
     try {
-      response = await fetch('/api/report/postReport', {
+      response = await fetch(`https://localhost:443/api/report/postReport`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -36,7 +36,7 @@ async function postReport(numPomodoros) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "pomodoros": parseFloat(5.5).toFixed(2)
+            "pomodoros": numPomodoros
         }),
       });
   

@@ -80,8 +80,6 @@ function formatDate(date) {
 
 async function getAPIData(mondayDate) {
   try {
-    const url = new URL('/api/report/getReport', window.location.origin);
-    url.searchParams.append('week-start', mondayDate);
     response = await fetch(`/api/report/getReport?week-start=${mondayDate}`, {
       method: "GET",
       mode: "cors",
@@ -99,6 +97,7 @@ async function getAPIData(mondayDate) {
 
     const data = await response.json();
     yValues = data['report'].map(a => a.pomodorosTotal);
+    console.log(yValues);
     let sum = 0.00;
     let daysAccessed = 0;
     let dayStreak = 0;
