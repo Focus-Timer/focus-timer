@@ -9,7 +9,7 @@ services:
     environment:
       NODE_ENV: production
       PORT_LOCAL: 443
-      MODE: local
+      MODE: debug
       DB_PASSWORD: StrongPassword123*
       DB_NAME: FocusTimer
       DB_USERNAME: db_user
@@ -17,6 +17,7 @@ services:
       COGNITO_USER_POOL_ID: eu-west-1_IKRz0uOSt
       LOCAL_URL: https://localhost:443
       COGNITO_CLIENT_ID: 5a78s0qjfu23hdmibeqrhfaldf
+      DB_ENDPOINT: sqlserver
     ports:
       - 80:80
       - 443:443
