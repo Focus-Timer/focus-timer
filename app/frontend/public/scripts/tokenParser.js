@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     // Function to extract tokens from URL
     function getTokensFromUrl() {
         const hash = window.location.hash.substr(1);
@@ -13,12 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return result;
     }
+
     // Extract tokens
     const tokens = getTokensFromUrl();
     if (tokens.id_token && tokens.access_token) {
         // Store tokens securely
         sessionStorage.setItem('id_token', tokens.id_token);
         sessionStorage.setItem('access_token', tokens.access_token);
+        console.log(sessionStorage.getItem('id_token'));
+        response = await fetch(`/api/user/signIn`, {
+            method: "PUT",
+            mode: "cors",
+            headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
+                "Content-Type": "application/json"
+            }
+        });
+        console.log("API Call to signIn made.");
 
         // You can now use these tokens for API calls
         console.log('Tokens extracted and stored securely');
