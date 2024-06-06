@@ -1,14 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     // Function to extract tokens from URL
     
-    var url = ""
-    require('dotenv').config({ override: true });
-    if(process.env.MODE !== 'production') {
-    url = process.env.LOCAL_URL
-    } else {
-    url = process.env.HOSTED_URL;
-    }
-
     function getTokensFromUrl() {
         const hash = window.location.hash.substr(1);
         const result = hash.split('&').reduce((res, item) => {
@@ -16,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             res[parts[0]] = parts[1];
             return res;
         }, {});
+        console.log(result)
 
         // Clear the URL hash to prevent exposing tokens
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -29,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Store tokens securely
         sessionStorage.setItem('id_token', tokens.id_token);
         sessionStorage.setItem('access_token', tokens.access_token);
-        response = await fetch(`${url}/api/user/signIn`, {
+        response = await fetch(`/api/user/signIn`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
