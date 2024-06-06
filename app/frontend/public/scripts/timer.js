@@ -15,7 +15,7 @@ const countDownClock = (minutes = 25, seconds = 0) => {
       clearInterval(countdown);
 
       if (taskList.length > 0) {
-        if (minutes === 25) {
+        if (pomodoroTab.classList.contains('is-active')) {
           taskList[currentTaskItem].currentPomodoro++;
           if (taskList[currentTaskItem].currentPomodoro % 4 !== 0) {
             goToShortBreak();
@@ -23,13 +23,13 @@ const countDownClock = (minutes = 25, seconds = 0) => {
             goToLongBreak();
           }
           updateTaskList();
-        } else if (minutes === 5) {
+        } else if (shortBreakTab.classList.contains('is-active')) {
           goToPomodoro();
-        } else if (minutes === 15) {
+        } else if (longBreakTab.classList.contains('is-active')) {
           goToPomodoro();
         }
       } else {
-        if (minutes === 25) {
+        if (pomodoroTab.classList.contains('is-active')) {
           tempPomodoro++;
           if (tempPomodoro % 4 !== 0) {
             goToShortBreak();
@@ -37,7 +37,7 @@ const countDownClock = (minutes = 25, seconds = 0) => {
             goToLongBreak();
           }
           
-        } else if (minutes === 5 || minutes === 15) {
+        } else if (shortBreakTab.classList.contains('is-active') || longBreakTab.classList.contains('is-active')) {
           goToPomodoro();
         }
       }
@@ -104,29 +104,19 @@ timerButton.onclick = () => {
   }   
 }
 
-pomodoroTab.onclick = () => {
-  mySound.play()
-  goToPomodoro();
-}
-
-shortBreakTab.onclick = () => {
-  mySound.play()
-  goToShortBreak();
-}
-
-longBreakTab.onclick = () => {
-  mySound.play()
-  goToLongBreak();
-}
-
 skipButton.onclick = () => {
   mySound.play()
-  minutesElement.textContent = '00';
-  secondsElement.textContent = '00';
-  clearInterval(countdown);
+  
   if (taskList.length > 0) {
     if (pomodoroTab.classList.contains('is-active')) {
-      taskList[currentTaskItem].currentPomodoro++;
+      const pomodoroInSeconds = 25 * 60;
+      const timeLeft = (Number(minutesElement.textContent) * 60) + Number(secondsElement.textContent);
+      const pomodoroDecimal = (pomodoroInSeconds - timeLeft) / pomodoroInSeconds;
+      if (pomodoroDecimal < 1) {
+        taskList[currentTaskItem].pomodorosCompleted = parseFloat(taskList[currentTaskItem].pomodorosCompleted.toFixed(2)) + parseFloat(pomodoroDecimal.toFixed(2));
+      }
+      
+      taskList[currentTaskItem].currentPomodoro += 1;
       if (taskList[currentTaskItem].currentPomodoro % 4 !== 0) {
         goToShortBreak();
       } else {
@@ -148,6 +138,8 @@ skipButton.onclick = () => {
         goToPomodoro();
     }
   }
-  
+  minutesElement.textContent = '00';
+  secondsElement.textContent = '00';
+  clearInterval(countdown);
 }
   

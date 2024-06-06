@@ -29,6 +29,7 @@ addTaskSaveButton.onclick = () => {
             taskName: addTaskInput.value,
             taskPomodoros: pomodorosInput.value,
             currentPomodoro: 0,
+            pomodorosCompleted: 0.00,
         };
         taskList.push(task);
         updateTaskList();
@@ -61,6 +62,7 @@ taskListComponent.addEventListener('click', function(event){
             document.getElementById('task-' + currentTaskItem).classList.remove('active-task');
             currentTaskItem = index;
             document.getElementById('task-' + currentTaskItem).classList.add('active-task');
+            goToPomodoro();
         }
  });
 

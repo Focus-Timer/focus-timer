@@ -10,11 +10,11 @@ cancelSessionButton.onclick = () => {
 
 confirmSessionButton.onclick = () => {
     // BACKEND CALL TO SAVE SESSION
-    let totalPomodoros = 0;
+    let totalPomodoros = 0.00;
     taskList.forEach((task) => {
-        totalPomodoros += Number(task.currentPomodoro);
+        totalPomodoros += parseFloat(task.pomodorosCompleted);
     });
-    // Get current user
+    postReport(totalPomodoros.toFixed(2));
 
     taskList = [];
     taskListComponent.innerHTML = "";
@@ -24,3 +24,30 @@ confirmSessionButton.onclick = () => {
     main.classList.remove('blur');
     sessionDialog.style.visibility = 'hidden';
 }
+
+async function postReport(numPomodoros) {
+    console.log(sessionStorage.getItem('id_token'));
+    try {
+      response = await fetch('/api/report/postReport', {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "pomodoros": parseFloat(5.5).toFixed(2)
+        }),
+      });
+  
+  
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
