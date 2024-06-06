@@ -1,7 +1,6 @@
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const jwksRsa = require('jwks-rsa');
-const debug_mode = process.env.MODE === 'debug';
 
 
 
