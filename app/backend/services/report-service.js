@@ -23,7 +23,6 @@ async function getReport(user, weekStart) {
           GROUP BY CAST(report.date AS DATE)
           ORDER BY date;
     `);
-
     return reportInfo.recordsets[0];
   } catch (error) {
     console.error(error);

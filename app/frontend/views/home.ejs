@@ -112,8 +112,8 @@
       <p class="line"></p>
     </section>
 
-    <article id="report-content">
-      <section class="report-content-container">
+    <article>
+      <section id="report-summary" class="report-content-container">
         <div class="activity-card">
           <div class="activity-card--left">
             <svg width="70" height="70" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,7 +123,7 @@
             </svg>
           </div>
           <div class="activity-card--right">
-            <h3>0</h3>
+            <h3 id="hours-focused">0</h3>
             <p>hours focused</p>
           </div>
         </div>
@@ -140,7 +140,7 @@
             </svg>              
           </div>
           <div class="activity-card--right">
-            <h3>0</h3>
+            <h3 id="days-accessed">0</h3>
             <p>days accessed</p>
           </div>
         </div>
@@ -157,12 +157,20 @@
               </svg>              
           </div>
           <div class="activity-card--right">
-            <h3>0</h3>
+            <h3 id="day-streak">0</h3>
             <p>day streak</p>
           </div>
         </div>
       
     </section>
+    <section class="graph-container hide-component">
+      <canvas id="focus-hours-chart" class="line-graph"></canvas>
+      <footer class="graph-footer">
+          <button class="prev-week-btn">Prev Week</button>
+          <p class="current-week">03/06/2024 to 10/06/2024</p>
+          <button class="next-week-btn">Next Week</button>
+      </footer>
+      </section>
     </article>
     
     
@@ -170,6 +178,7 @@
 
   <dialog id="session-dialog" >
     <h3 class="session-header">Are you sure you want to save the session?</h3>
+    <p class="session-text">If you have a partially completed task and it has not been skipped that time will not be saved. Cancel, and skip that pomodoro to save</p>
     <p class="session-text">Note that all your tasks will be cleared and the session will be reset.</p>
     <footer class="session-footer">
       <button class="session-cancel-btn">Cancel</button>

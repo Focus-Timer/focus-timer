@@ -3,13 +3,10 @@ const jwt = require('jsonwebtoken');
 const jwksRsa = require('jwks-rsa');
 const debug_mode = process.env.MODE === 'debug';
 
+
+
 function verifyToken(req, res, next) {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-
-  if (debug_mode) {
-    req.user = { sub: req.headers.authorization, name: "developer" };
-    return next();
-  }
 
   if (!token) {
     return res.status(401).send('Access token is missing');
@@ -50,3 +47,24 @@ function verifyToken(req, res, next) {
 };
 
 module.exports = verifyToken;
+// const { CognitoJwtVerifier } = require("aws-jwt-verify");
+ 
+// const verifier = CognitoJwtVerifier.create({
+//   userPoolId: process.env.COGNITO_USER_POOL_ID,
+//   tokenUse: "id",
+//   clientId: process.env.COGNITO_CLIENT_ID,
+// });
+ 
+// const authenticateSession = async (req, res, next) => {
+//   try {
+//     const token = req?.headers?.authorization?.split(" ")[1];
+//     const payload = await verifier.verify(token);
+//     req.user = payload;
+//     next(); // Pass control to the next middleware function
+//   } catch (error) {
+//     console.error("Error verifying token:", error);
+//     return res.status(403).json({ message: "Invalid or expired token." });
+//   }
+// };
+ 
+// module.exports = authenticateSession;

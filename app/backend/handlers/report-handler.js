@@ -6,10 +6,12 @@ const corsOptions = require('../config/cors-middleware.js');
 var verifyToken = require('../config/auth-middleware.js');
 var ReportService = require('../services/report-service.js');
 const moment = require('moment');
+// const authenticateSession = require('../config/auth-middleware.js');
 
 router.get('/getReport', cors(corsOptions), verifyToken, validateWeekStart, async (req, res) => {
   try {
-    const report = await ReportService.getReport(req.user, req.body['week-start']);
+    const report = await ReportService.getReport(req.user, req.query['week-start']);
+
     if (!report) {
       return res.status(404).send({ message: 'Report for user not found' });
     }
@@ -35,26 +37,29 @@ router.post('/postReport', cors(corsOptions), verifyToken, validatePomodoros, as
 
 //Validation 
 async function validatePomodoros(req, res, next) {
-  await body('pomodoros').isFloat({ min: 1, max: 44.00 }).withMessage('Pomodoros must be a decimal to two decimal places between 1 and 44').run(req)
+  await body('pomodoros').isFloat({ min: 0.01, max: 44.00 }).withMessage('Pomodoros must be a decimal to two decimal places between 1 and 44').run(req)
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   next();
 };
 
 async function validateWeekStart(req, res, next) {
-  await body('week-start')
-    .custom((value) => {
-      // Check if the date is in the correct format
-      const date = moment(value, 'YYYY-MM-DD HH:mm:ss', true);
-      if (!date.isValid()) throw new Error('Invalid date format, should be YYYY-MM-DD HH:mm:ss');
-      if (date.format('HH:mm:ss') !== '00:00:00') throw new Error('Time must be midnight (00:00:00)');
-      if (date.day() !== 1) throw new Error('Date must be a Monday');
-      if (date.isAfter(moment().startOf('day'))) throw new Error('Date cannot be in the future');
-      return true;
-    })
-    .run(req);
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+  const weekStart = req.query['week-start'];
+
+  if (!weekStart) {
+    return res.status(400).json({ errors: [{ msg: 'Missing week-start parameter' }] });
+  }
+
+  try {
+    const date = moment(weekStart, 'YYYY-MM-DD HH:mm:ss', true);
+    if (!date.isValid()) throw new Error('Invalid date format, should be YYYY-MM-DD HH:mm:ss');
+    if (date.format('HH:mm:ss') !== '00:00:00') throw new Error('Time must be midnight (00:00:00)');
+    if (date.day() !== 1) throw new Error('Date must be a Monday');
+    // if (date.isAfter(moment().startOf('day'))) throw new Error('Date cannot be in the future');
+  } catch (error) {
+    return res.status(400).json({ errors: [{ msg: error.message }] });
+  }
+
   next();
 };
 
