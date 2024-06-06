@@ -38,7 +38,7 @@ confirmSessionButton.onclick = () => {
 const postReport = async (numPomodoros) => {
   
     try {
-      const response = await fetch(`https://localhost/api/report/postReport`, {
+      const response = await fetch(`/api/report/postReport`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
