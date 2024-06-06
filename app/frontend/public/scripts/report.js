@@ -96,22 +96,24 @@ async function getAPIData(mondayDate) {
     }
 
     const data = await response.json();
-    yValues = data['report'].map(a => a.pomodorosTotal);
-    console.log(yValues);
+    dailyPomodoros = data['report'].map(a => a.pomodorosTotal);
+    yValues = [0, 0, 0, 0, 0, 0, 0];
     let sum = 0.00;
     let daysAccessed = 0;
     let dayStreak = 0;
     let streakBroken = false;
-    for (var val in yValues) {
-      if (val > 0.00) {
+    for (let i = 0; i < 7; i++) {
+      if (dailyPomodoros[i] && parseFloat(dailyPomodoros[i]) > 0.00) {
         daysAccessed++;
         if (!streakBroken) {
           dayStreak++;
         }
+        yValues[i] = parseFloat(dailyPomodoros[i]);
+        sum = (parseFloat(sum) + parseFloat(dailyPomodoros[i])).toFixed(2);
       } else {
         streakBroken = true;
       }
-      sum = (parseFloat(sum) + parseFloat(val)).toFixed(2);
+      
     }
 
     daysAccessedElement.textContent = daysAccessed;
