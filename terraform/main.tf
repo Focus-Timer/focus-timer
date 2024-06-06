@@ -233,11 +233,11 @@ resource "aws_elastic_beanstalk_environment" "web_env" {
   }
 
   # Optional: redirect HTTP to HTTPS
-  # setting {
-  #   namespace = "aws:elbv2:listener:80"
-  #   name      = "Rules"
-  #   value     = "path-pattern / -> forward: 443, path-pattern /* -> redirect: https://rudolph-sucks.projects.bbdgrad.com#{path}?#{query}"
-  # }
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "Rules"
+    value     = "path-pattern / -> forward: 443, path-pattern /* -> redirect: https://{host}#{path}?#{query}"
+  }
 
 }
 

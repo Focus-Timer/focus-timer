@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   website:
     build:
       context: ./
@@ -9,12 +8,25 @@ services:
     container_name: focus-app
     environment:
       NODE_ENV: production
+      PORT_LOCAL: 443
+      MODE: local
+      DB_PASSWORD: StrongPassword123*
+      DB_NAME: FocusTimer
+      DB_USERNAME: db_user
+      DB_PORT: 1433
+      COGNITO_USER_POOL_ID: eu-west-1_IKRz0uOSt
+      LOCAL_URL: https://localhost:443
+      COGNITO_CLIENT_ID: 5a78s0qjfu23hdmibeqrhfaldf
+      DB_ENDPOINT: sqlserver
+      HOSTED_URL: https://localhost
     ports:
       - 80:80
       - 443:443
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    build:
+      context: ./
+      dockerfile: ./Dockerfiledb
     container_name: focus-db
     environment:
       - ACCEPT_EULA=Y
@@ -22,17 +34,6 @@ services:
       - MSSQL_PID=Developer
     ports:
       - 1433:1433
-    restart: always
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "/opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P StrongPassword123# -Q 'SELECT 1' || exit 1"
-        ]
-      interval: 10s
-      retries: 10
-      start_period: 10s
-      timeout: 3s
 
   sqlserver.configurator:
     image: mcr.microsoft.com/mssql/server:2019-latest
