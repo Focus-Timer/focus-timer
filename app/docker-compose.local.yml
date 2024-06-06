@@ -18,6 +18,7 @@ services:
       LOCAL_URL: https://localhost:443
       COGNITO_CLIENT_ID: 5a78s0qjfu23hdmibeqrhfaldf
       DB_ENDPOINT: sqlserver
+      HOSTED_URL: https://localhost
     ports:
       - 80:80
       - 443:443
