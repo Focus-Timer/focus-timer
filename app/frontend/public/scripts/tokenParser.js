@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
     // Function to extract tokens from URL
+    
+    var url = ""
+    require('dotenv').config({ override: true });
+    if(process.env.MODE !== 'production') {
+    url = process.env.LOCAL_URL
+    } else {
+    url = process.env.HOSTED_URL;
+    }
+
     function getTokensFromUrl() {
         const hash = window.location.hash.substr(1);
         const result = hash.split('&').reduce((res, item) => {
@@ -21,9 +30,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         sessionStorage.setItem('id_token', tokens.id_token);
         sessionStorage.setItem('access_token', tokens.access_token);
         console.log(sessionStorage.getItem('id_token'));
-        response = await fetch(`/api/user/signIn`, {
+        response = await fetch(`${url}/api/user/signIn`, {
             method: "PUT",
-            mode: "cors",
             headers: {
                 "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
                 "Content-Type": "application/json"

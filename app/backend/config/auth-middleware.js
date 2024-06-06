@@ -1,15 +1,9 @@
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const jwksRsa = require('jwks-rsa');
-const debug_mode = process.env.MODE === 'debug';
 
 function verifyToken(req, res, next) {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-
-  if (debug_mode) {
-    req.user = { sub: req.headers.authorization, name: "developer" };
-    return next();
-  }
 
   if (!token) {
     return res.status(401).send('Access token is missing');
