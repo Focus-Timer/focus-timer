@@ -78,6 +78,17 @@ function formatDate(date) {
     return `${year}-${month}-${day}`;
 }
 
+function compareDates(date1, date2) {
+  const year1 = date1.getFullYear();
+  const month1 = String(date1.getMonth() + 1).padStart(2, '0');
+  const day1 = String(date1.getDate()).padStart(2, '0');
+
+  const year2 = date2.getFullYear();
+  const month2 = String(date2.getMonth() + 1).padStart(2, '0');
+  const day2 = String(date2.getDate()).padStart(2, '0');
+  return year1 === year2 && month1 === month2 && day1 === day2;
+}
+
 async function getAPIData(mondayDate) {
   try {
     response = await fetch(`/api/report/getReport?week-start=${mondayDate}`, {
@@ -93,7 +104,9 @@ async function getAPIData(mondayDate) {
     }
 
     const data = await response.json();
-    dailyPomodoros = data['report'].map(a => a.pomodorosTotal);
+    dailyPomodoros = getWeeklyPomodoros(data['report'], new Date(mondayDate));
+    // dailyPomodoros = data['report'].map(a => a.pomodorosTotal);
+    
     yValues = [0, 0, 0, 0, 0, 0, 0];
     let sum = 0.00;
     let daysAccessed = 0;
@@ -120,4 +133,22 @@ async function getAPIData(mondayDate) {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+}
+
+function getWeeklyPomodoros(report, mondayDate) {
+  const weeklyPomodoros = new Array(7).fill(0);
+
+  for (let i = 0; i < 7; i++) {
+    const dayDate = new Date(mondayDate);
+    dayDate.setDate(mondayDate.getDate() + i);
+
+    for (const entry of report) {
+      if (compareDates(new Date(entry.date), dayDate)) {
+        weeklyPomodoros[i] += entry.pomodorosTotal;
+        break;
+      }
+    }
+  }
+
+  return weeklyPomodoros;
 }
