@@ -106,7 +106,8 @@ timerButton.onclick = () => {
 
 skipButton.onclick = () => {
   mySound.play()
-  
+  minutesElement.textContent = '00';
+  secondsElement.textContent = '00';
   if (taskList.length > 0) {
     if (pomodoroTab.classList.contains('is-active')) {
       const pomodoroInSeconds = 25 * 60;
@@ -138,8 +139,6 @@ skipButton.onclick = () => {
         goToPomodoro();
     }
   }
-  minutesElement.textContent = '00';
-  secondsElement.textContent = '00';
   clearInterval(countdown);
 }
   
